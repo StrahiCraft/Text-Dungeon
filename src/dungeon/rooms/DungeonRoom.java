@@ -1,0 +1,116 @@
+package dungeon.rooms;
+
+import utility.Vector2Int;
+
+public class DungeonRoom {
+    private Vector2Int position;
+    private String flavourText;
+
+    private DungeonRoom northRoom;
+    private DungeonRoom eastRoom;
+    private DungeonRoom southRoom;
+    private DungeonRoom westRoom;
+
+    public DungeonRoom(Vector2Int position) {
+        this.position = position;
+    }
+
+    public void setRoom(DungeonRoom room, Vector2Int direction) {
+        if(direction == null) {
+            System.out.println("ERROR! Direction is null.");
+            return;
+        }
+
+        if(direction.equalValue(Vector2Int.up())){
+            setNorthRoom(room);
+            return;
+        }
+
+        if(direction.equalValue(Vector2Int.down())){
+            setSouthRoom(room);
+            return;
+        }
+
+        if(direction.equalValue(Vector2Int.left())){
+            setWestRoom(room);
+            return;
+        }
+
+        if(direction.equalValue(Vector2Int.right())){
+            setEastRoom(room);
+            return;
+        }
+
+        System.out.println("ERROR! Invalid direction.");
+    }
+
+    public DungeonRoom getRoom(Vector2Int direction) {
+        if(direction == null) {
+            System.out.println("ERROR! Direction is null.");
+            return this;
+        }
+
+        if(direction.equalValue(Vector2Int.up())){
+            return getNorthRoom();
+        }
+
+        if(direction.equalValue(Vector2Int.down())){
+            return getSouthRoom();
+        }
+
+        if(direction.equalValue(Vector2Int.left())){
+            return getWestRoom();
+        }
+
+        if(direction.equalValue(Vector2Int.right())){
+            return getWestRoom();
+        }
+
+        System.out.println("ERROR! Invalid direction.");
+        return this;
+    }
+
+    public Vector2Int getPosition() {
+        return position;
+    }
+
+    public String getFlavourText() {
+        return flavourText;
+    }
+
+    public void setFlavourText(String flavourText) {
+        this.flavourText = flavourText;
+    }
+
+    public DungeonRoom getNorthRoom() {
+        return northRoom;
+    }
+
+    public void setNorthRoom(DungeonRoom northRoom) {
+        this.northRoom = northRoom;
+    }
+
+    public DungeonRoom getEastRoom() {
+        return eastRoom;
+    }
+
+    public void setEastRoom(DungeonRoom eastRoom) {
+        this.eastRoom = eastRoom;
+    }
+
+    public DungeonRoom getSouthRoom() {
+        return southRoom;
+    }
+
+    public void setSouthRoom(DungeonRoom southRoom) {
+        this.southRoom = southRoom;
+    }
+
+    public DungeonRoom getWestRoom() {
+        return westRoom;
+    }
+
+    public void setWestRoom(DungeonRoom westRoom) {
+        this.westRoom = westRoom;
+    }
+}
