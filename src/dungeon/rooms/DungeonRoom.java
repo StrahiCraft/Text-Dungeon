@@ -63,7 +63,7 @@ public class DungeonRoom {
         }
 
         if(direction.equalValue(Vector2Int.right())){
-            return getWestRoom();
+            return getEastRoom();
         }
 
         System.out.println("ERROR! Invalid direction.");

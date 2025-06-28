@@ -1,4 +1,3 @@
-import dungeon.Dungeon;
 import dungeon.DungeonGenerator;
 import dungeon.DungeonMapRenderer;
 

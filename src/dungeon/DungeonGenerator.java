@@ -39,6 +39,10 @@ public class DungeonGenerator {
 
         DungeonRoom newRoom = makeNewRoomConnection(currentRoom, direction);
 
+        if(newRoom == null){
+            return;
+        }
+
         currentRoom.setRoom(newRoom, direction);
         newRoom.setRoom(currentRoom, direction.reversed());
 
@@ -54,8 +58,10 @@ public class DungeonGenerator {
 
     private static DungeonRoom makeNewRoomConnection(DungeonRoom currentRoom, Vector2Int direction) {
         for (DungeonRoom dungeonRoom : Collections.list(Dungeon.getDungeonRooms().elements())) {
-            if (dungeonRoom.getPosition().equals(currentRoom.getPosition().add(direction))) {
-                return dungeonRoom;
+            if (dungeonRoom.getPosition().equalValue(currentRoom.getPosition().add(direction))) {
+                currentRoom.setRoom(dungeonRoom, direction);
+                dungeonRoom.setRoom(currentRoom, direction.reversed());
+                return null;
             }
         }
 
