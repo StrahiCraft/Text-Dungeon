@@ -2,6 +2,7 @@ package dungeon;
 
 import dungeon.rooms.DungeonRoom;
 import dungeon.utility.DungeonBounds;
+import entity.player.Player;
 import utility.Vector2Int;
 
 import java.util.Arrays;
@@ -9,16 +10,24 @@ import java.util.Collections;
 
 public class DungeonMapRenderer {
 
-    public static void renderDungeonMap(){
+    public static String renderDungeonMap(){
         char[][] dungeonMap = fillDungeonMap();
+        StringBuilder mapString = new StringBuilder();
 
         for(int x = dungeonMap.length - 1; x > 0; x--){
             for(int y = 0; y < dungeonMap[x].length; y++){
+                if(dungeonMap[x][y] == 'P'){
+                    System.out.print("\u001B[32m");
+                }
                 System.out.printf("%c", dungeonMap[x][y]);
+                System.out.print("\u001B[0m");
+                mapString.append(dungeonMap[x][y]);
             }
+            mapString.append('\n');
             System.out.println();
         }
         System.out.println();
+        return mapString.toString();
     }
 
     private static char[][] fillDungeonMap(){
@@ -41,13 +50,10 @@ public class DungeonMapRenderer {
     }
 
     private static void fillDungeonRoom(DungeonRoom currentRoom, char[][] dungeonMap, DungeonBounds dungeonBounds){
-        dungeonMap[(currentRoom.getPosition().getY() - dungeonBounds.getMinDungeonCoordinate().getY()) * 3 + 1]
-                [(currentRoom.getPosition().getX() - dungeonBounds.getMinDungeonCoordinate().getX()) * 3 + 1] = '#';
+        char roomSymbol = currentRoom.getPosition().equalValue(Player.Instance.getCurrentRoom().getPosition())? 'P' : '#';
 
-        if(currentRoom.getPosition().getX() == 0 && currentRoom.getPosition().getY() == 0){
-            dungeonMap[(currentRoom.getPosition().getY() - dungeonBounds.getMinDungeonCoordinate().getY()) * 3 + 1]
-                    [(currentRoom.getPosition().getX() - dungeonBounds.getMinDungeonCoordinate().getX()) * 3 + 1] = 'S';
-        }
+        dungeonMap[(currentRoom.getPosition().getY() - dungeonBounds.getMinDungeonCoordinate().getY()) * 3 + 1]
+                [(currentRoom.getPosition().getX() - dungeonBounds.getMinDungeonCoordinate().getX()) * 3 + 1] = roomSymbol;
 
         fillHallways(currentRoom, Vector2Int.up(), dungeonMap, dungeonBounds);
         fillHallways(currentRoom, Vector2Int.down(), dungeonMap, dungeonBounds);

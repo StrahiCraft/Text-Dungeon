@@ -1,8 +1,9 @@
 package dungeon.rooms;
 
+import entity.player.states.PlayerState;
 import utility.Vector2Int;
 
-public class DungeonRoom {
+public abstract class DungeonRoom {
     private Vector2Int position;
     private String flavourText;
 
@@ -14,6 +15,8 @@ public class DungeonRoom {
     public DungeonRoom(Vector2Int position) {
         this.position = position;
     }
+
+    public abstract PlayerState getRoomState();
 
     public void setRoom(DungeonRoom room, Vector2Int direction) {
         if(direction == null) {

@@ -1,6 +1,8 @@
 package dungeon;
 
 import dungeon.rooms.DungeonRoom;
+import dungeon.rooms.EmptyRoom;
+import entity.player.Player;
 import utility.Vector2Int;
 
 import java.util.Collections;
@@ -15,7 +17,7 @@ public class DungeonGenerator {
 
         Stack<DungeonRoom> roomsToPropagate = new Stack<DungeonRoom>();
 
-        Dungeon.getDungeonRooms().put(new Vector2Int().toString(), new DungeonRoom(new Vector2Int(0, 0)));
+        Dungeon.getDungeonRooms().put(new Vector2Int().toString(), new EmptyRoom(new Vector2Int(0, 0)));
         roomsToPropagate.push(Dungeon.getDungeonRooms().get(new Vector2Int().toString()));
 
         while(Dungeon.getDungeonRooms().size() <= MAX_ROOMS && !roomsToPropagate.isEmpty()){
@@ -26,6 +28,8 @@ public class DungeonGenerator {
             tryAddRoomOrConnection(currentRoom, roomsToPropagate, Vector2Int.left());
             tryAddRoomOrConnection(currentRoom, roomsToPropagate, Vector2Int.right());
         }
+
+        Player.Instance.setCurrentRoom(Dungeon.getStartingRoom());
     }
 
     private static void tryAddRoomOrConnection(DungeonRoom currentRoom, Stack<DungeonRoom> roomsToPropagate, Vector2Int direction) {
@@ -65,6 +69,6 @@ public class DungeonGenerator {
             }
         }
 
-        return new DungeonRoom(currentRoom.getPosition().add(direction));
+        return new EmptyRoom(currentRoom.getPosition().add(direction));
     }
 }
