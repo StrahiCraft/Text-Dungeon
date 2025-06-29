@@ -40,24 +40,16 @@ public class PlayerWandering extends PlayerState{
 
     @Override
     public void checkInput(String inputText, Scanner input) {
-        switch (inputText) {
-            case "map":
-                DungeonMapRenderer.renderDungeonMap();
-                break;
+        if(inputText.equals("map")){
+            DungeonMapRenderer.renderDungeonMap();
+            return;
+        }
 
-            case "north":
-            case "east":
-            case "south":
-            case "west":
-                goToRoom(inputText, input);
-                break;
-
-            case "help":
-                getHelp(input);
-                break;
-            default:
-                onRandomStuffInputed();
-                break;
+        if(inputText.equals("north") ||
+                inputText.equals("east") ||
+                inputText.equals("south") ||
+                inputText.equals("west")){
+            goToRoom(inputText, input);
         }
     }
 

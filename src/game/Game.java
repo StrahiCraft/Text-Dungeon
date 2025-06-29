@@ -24,4 +24,8 @@ public class Game {
 
         input.close();
     }
+
+    public static void setGameRunning(boolean gameRunning) {
+        Game.gameRunning = gameRunning;
+    }
 }
