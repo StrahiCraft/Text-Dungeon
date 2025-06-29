@@ -6,3 +6,4 @@
 <a href="https://www.w3schools.com/java/default.asp">Java W3Schools</a><br>
 <a href="https://stackoverflow.com/questions/5610822/convert-enumeration-to-a-set-list">Convert Enumeration to a Set/List</a><br>
 <a href="https://www.geeksforgeeks.org/java/dictionary-remove-method-in-java/">Dictionary remove() Method in Java</a><br>
+<a href="https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println/5762502#5762502">How to print color in console using System.out.println?</a>
