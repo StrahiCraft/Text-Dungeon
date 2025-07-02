@@ -3,6 +3,8 @@ package entity.player.states;
 import dungeon.DungeonMapRenderer;
 import dungeon.rooms.DungeonRoom;
 import entity.player.Player;
+import graphics.Color;
+import graphics.TextRenderer;
 import utility.Vector2Int;
 
 import java.util.Dictionary;
@@ -15,21 +17,21 @@ public class PlayerWandering extends PlayerState{
 
     public PlayerWandering() {
         super();
-        possibleCommands.add("map");
+        possibleCommands.add(Color.getColor("blue") + "map" + Color.resetColor());
 
         DungeonRoom currentRoom = Player.Instance.getCurrentRoom();
 
         if(currentRoom.getNorthRoom() != null){
-            possibleCommands.add("north");
+            possibleCommands.add(Color.getColor("bright yellow") + "north" + Color.resetColor());
         }
         if(currentRoom.getEastRoom() != null){
-            possibleCommands.add("east");
+            possibleCommands.add(Color.getColor("bright yellow") + "east" + Color.resetColor());
         }
         if(currentRoom.getSouthRoom() != null){
-            possibleCommands.add("south");
+            possibleCommands.add(Color.getColor("bright yellow") + "south" + Color.resetColor());
         }
         if(currentRoom.getWestRoom() != null){
-            possibleCommands.add("west");
+            possibleCommands.add(Color.getColor("bright yellow") + "west" + Color.resetColor());
         }
 
         directionalDictionary.put("north", Vector2Int.up());
@@ -39,10 +41,10 @@ public class PlayerWandering extends PlayerState{
     }
 
     @Override
-    public void checkInput(String inputText, Scanner input) {
+    public boolean checkInput(String inputText, Scanner input) {
         if(inputText.equals("map")){
-            DungeonMapRenderer.renderDungeonMap();
-            return;
+            TextRenderer.printText(DungeonMapRenderer.renderDungeonMap());
+            return true;
         }
 
         if(inputText.equals("north") ||
@@ -50,12 +52,14 @@ public class PlayerWandering extends PlayerState{
                 inputText.equals("south") ||
                 inputText.equals("west")){
             goToRoom(inputText, input);
+            return true;
         }
+        return false;
     }
 
     private void goToRoom(String direction, Scanner input) {
-        if(!possibleCommands.contains(direction)){
-            System.out.println("This room doesn't have a " + direction + "ern door, try another direction.\n");
+        if(!possibleCommands.contains(Color.getColor("bright yellow") + direction+ Color.resetColor())){
+            TextRenderer.printText("This room doesn't have a " + direction + "ern door, try another direction.\n");
             getInput(input);
             return;
         }

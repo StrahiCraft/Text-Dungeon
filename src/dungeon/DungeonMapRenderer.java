@@ -3,6 +3,7 @@ package dungeon;
 import dungeon.rooms.DungeonRoom;
 import dungeon.utility.DungeonBounds;
 import entity.player.Player;
+import graphics.Color;
 import utility.Vector2Int;
 
 import java.util.Arrays;
@@ -17,16 +18,12 @@ public class DungeonMapRenderer {
         for(int x = dungeonMap.length - 1; x > 0; x--){
             for(int y = 0; y < dungeonMap[x].length; y++){
                 if(dungeonMap[x][y] == 'P'){
-                    System.out.print("\u001B[32m");
+                    mapString.append(Color.getColor("green"));
                 }
-                System.out.printf("%c", dungeonMap[x][y]);
-                System.out.print("\u001B[0m");
-                mapString.append(dungeonMap[x][y]);
+                mapString.append(dungeonMap[x][y] + "\u001B[0m");
             }
             mapString.append('\n');
-            System.out.println();
         }
-        System.out.println();
         return mapString.toString();
     }
 
@@ -50,6 +47,10 @@ public class DungeonMapRenderer {
     }
 
     private static void fillDungeonRoom(DungeonRoom currentRoom, char[][] dungeonMap, DungeonBounds dungeonBounds){
+        if(!currentRoom.getExplored()){
+            return;
+        }
+
         char roomSymbol = currentRoom.getPosition().equalValue(Player.Instance.getCurrentRoom().getPosition())? 'P' : '#';
 
         dungeonMap[(currentRoom.getPosition().getY() - dungeonBounds.getMinDungeonCoordinate().getY()) * 3 + 1]

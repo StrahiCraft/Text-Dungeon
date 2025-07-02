@@ -35,5 +35,8 @@ public class Player extends Entity {
     public void setCurrentRoom(DungeonRoom currentRoom) {
         this.currentRoom = currentRoom;
         currentState = currentRoom.getRoomState();
+        currentRoom.setExplored(true);
+
+        currentRoom.onRoomEntered();
     }
 }

@@ -5,7 +5,11 @@ import utility.Vector2Int;
 
 public abstract class DungeonRoom {
     private Vector2Int position;
-    private String flavourText;
+
+    private String descriptionText = "You find yourself in a room.";
+    private String flavourText = "";
+
+    private boolean explored;
 
     private DungeonRoom northRoom;
     private DungeonRoom eastRoom;
@@ -17,6 +21,7 @@ public abstract class DungeonRoom {
     }
 
     public abstract PlayerState getRoomState();
+    public abstract void onRoomEntered();
 
     public void setRoom(DungeonRoom room, Vector2Int direction) {
         if(direction == null) {
@@ -77,12 +82,24 @@ public abstract class DungeonRoom {
         return position;
     }
 
+    public void setPosition(Vector2Int position) {
+        this.position = position;
+    }
+
     public String getFlavourText() {
         return flavourText;
     }
 
     public void setFlavourText(String flavourText) {
         this.flavourText = flavourText;
+    }
+
+    public String getDescriptionText() {
+        return descriptionText;
+    }
+
+    public void setDescriptionText(String descriptionText) {
+        this.descriptionText = descriptionText;
     }
 
     public DungeonRoom getNorthRoom() {
@@ -115,5 +132,13 @@ public abstract class DungeonRoom {
 
     public void setWestRoom(DungeonRoom westRoom) {
         this.westRoom = westRoom;
+    }
+
+    public boolean getExplored() {
+        return explored;
+    }
+
+    public void setExplored(boolean explored) {
+        this.explored = explored;
     }
 }

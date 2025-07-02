@@ -1,6 +1,8 @@
 package entity.player.states;
 
 import game.Game;
+import graphics.Color;
+import graphics.TextRenderer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,19 +11,30 @@ public abstract class PlayerState {
     protected ArrayList<String> possibleCommands = new ArrayList<>();
 
     public PlayerState() {
-        possibleCommands.add("help");
-        possibleCommands.add("quit");
+        possibleCommands.add(Color.getColor("green") + "help" + Color.resetColor());
+        possibleCommands.add(Color.getColor("red") + "quit" + Color.resetColor());
     }
 
     public void getInput(Scanner input) {
-        System.out.println("Type what you want to do: ");
+        TextRenderer.printText("What will you do?");
         String inputText = input.nextLine();
 
-        checkInput(inputText.toLowerCase(), input);
+        if(checkInput(inputText.toLowerCase(), input)){
+            return;
+        }
         defaultInputCheck(inputText.toLowerCase(), input);
     }
 
-    public abstract void checkInput(String inputText, Scanner input);
+    /**
+     * Checks if the input the player has given makes sense for the context they are in.
+     * @param inputText
+     * The inputted text that will be checked.
+     * @param input
+     * Scanner that is used to read the input
+     * @return
+     * False if the inputText doesn't correspond to anything, True if it does.
+     */
+    public abstract boolean checkInput(String inputText, Scanner input);
 
     private void defaultInputCheck(String inputText, Scanner input) {
         if(inputText.equals("help")){
@@ -34,19 +47,21 @@ public abstract class PlayerState {
             return;
         }
 
-        onRandomStuffInputed();
+        onRandomStuffInputted();
     }
 
     private void getHelp(Scanner input) {
-        System.out.println("List of current possible commands:");
+        String helpText = Color.getColor("bright yellow") + "List of current possible commands:\n" + Color.resetColor();
         for (String command : possibleCommands) {
-            System.out.println(command);
+            helpText += command + "\n";
         }
-        System.out.println();
+        TextRenderer.printText(helpText);
         getInput(input);
     }
 
-    private void onRandomStuffInputed(){
-        System.out.println("Seems like you need help, type 'help' to get some.\n");
+    private void onRandomStuffInputted(){
+        TextRenderer.printText("Seems like you need help, type " +
+                Color.getColor("green") + "help" + Color.resetColor() +
+                " to get some.");
     }
 }
