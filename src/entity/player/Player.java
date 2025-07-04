@@ -12,12 +12,18 @@ public class Player extends Entity {
     public static Player Instance;
 
     private DungeonRoom currentRoom;
+    private DungeonRoom previousRoom;
     private PlayerState currentState;
 
-    public Player(Stats stats, String name) {
-        super(stats, name);
+    public Player(String name, Stats stats) {
+        super(name, stats);
         Instance = this;
         currentRoom = Dungeon.getStartingRoom();
+    }
+
+    @Override
+    public void handleDeath() {
+
     }
 
     public void getInput(Scanner input) {
@@ -33,10 +39,19 @@ public class Player extends Entity {
     }
 
     public void setCurrentRoom(DungeonRoom currentRoom) {
+        previousRoom = this.currentRoom;
         this.currentRoom = currentRoom;
         currentState = currentRoom.getRoomState();
         currentRoom.setExplored(true);
 
         currentRoom.onRoomEntered();
+    }
+
+    public DungeonRoom getPreviousRoom() {
+        return previousRoom;
+    }
+
+    public void setPreviousRoom(DungeonRoom previousRoom) {
+        this.previousRoom = previousRoom;
     }
 }

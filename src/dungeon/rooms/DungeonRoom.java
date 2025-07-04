@@ -8,6 +8,7 @@ public abstract class DungeonRoom {
 
     private String descriptionText = "You find yourself in a room.";
     private String flavourText = "";
+    private char roomSymbol = '#';
 
     private boolean explored;
 
@@ -140,5 +141,13 @@ public abstract class DungeonRoom {
 
     public void setExplored(boolean explored) {
         this.explored = explored;
+    }
+
+    public char getRoomSymbol() {
+        return roomSymbol;
+    }
+
+    public void setRoomSymbol(char roomSymbol) {
+        this.roomSymbol = roomSymbol;
     }
 }

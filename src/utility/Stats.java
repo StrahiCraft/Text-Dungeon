@@ -1,6 +1,14 @@
 package utility;
 
-public class Stats {
+import graphics.Color;
+import utility.file.FileInterpreter;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class Stats implements utility.file.FileWriter, FileInterpreter {
     private static final float MAX_ARMOR = 100;
 
     private float maxHealth;
@@ -21,6 +29,28 @@ public class Stats {
         this.currentHealth = currentHealth;
         this.armor = armor;
         this.damage = damage;
+    }
+
+    @Override
+    public void writeToFile() {
+        System.out.println(Color.getColor("bright red") +
+                "Error, don't write stats to utility.file without a file writer name!" + Color.resetColor());
+    }
+
+    @Override
+    public void writeToFile(FileWriter fileWriter) {
+        try {
+            fileWriter.append(maxHealth + "\n");
+            fileWriter.append(currentHealth + "\n");
+            fileWriter.append(armor + "\n");
+            fileWriter.append(damage + "\n");
+
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(Color.getColor("bright red") +
+                    "Error while writing stats to file!" + Color.resetColor());
+            e.printStackTrace();
+        }
     }
 
     public static float getMaxArmor() {
@@ -68,8 +98,16 @@ public class Stats {
     @Override
     public String toString() {
         return "Stats: " +
-                currentHealth + "/" + maxHealth + "HP " +
-                armor + " ARMOR " +
-                damage + " DAMAGE";
+                currentHealth + "/" + maxHealth + Color.getColor("red") + "HP " + Color.resetColor() +
+                armor + Color.getColor("yellow") + " ARMOR " + Color.resetColor() +
+                damage + Color.getColor("magenta") + " DAMAGE" + Color.resetColor();
+    }
+
+    @Override
+    public void interpretFileData(ArrayList<String> fileData) {
+        maxHealth = Float.parseFloat(fileData.get(0));
+        currentHealth = Float.parseFloat(fileData.get(1));
+        armor = Float.parseFloat(fileData.get(2));
+        damage = Float.parseFloat(fileData.get(3));
     }
 }

@@ -17,14 +17,21 @@ public class DungeonMapRenderer {
 
         for(int x = dungeonMap.length - 1; x > 0; x--){
             for(int y = 0; y < dungeonMap[x].length; y++){
-                if(dungeonMap[x][y] == 'P'){
-                    mapString.append(Color.getColor("green"));
-                }
-                mapString.append(dungeonMap[x][y] + "\u001B[0m");
+                mapString.append(getRoomColor(dungeonMap[x][y]) + dungeonMap[x][y] + "\u001B[0m");
             }
             mapString.append('\n');
         }
         return mapString.toString();
+    }
+
+    private static String getRoomColor(char roomType){
+        if(roomType == 'P'){
+            return Color.getColor("green");
+        }
+        if(roomType == 'E'){
+            return Color.getColor("red");
+        }
+        return Color.resetColor();
     }
 
     private static char[][] fillDungeonMap(){
@@ -51,7 +58,8 @@ public class DungeonMapRenderer {
             return;
         }
 
-        char roomSymbol = currentRoom.getPosition().equalValue(Player.Instance.getCurrentRoom().getPosition())? 'P' : '#';
+        char roomSymbol = currentRoom.getPosition().equalValue(Player.Instance.getCurrentRoom().getPosition())?
+                'P' : currentRoom.getRoomSymbol();
 
         dungeonMap[(currentRoom.getPosition().getY() - dungeonBounds.getMinDungeonCoordinate().getY()) * 3 + 1]
                 [(currentRoom.getPosition().getX() - dungeonBounds.getMinDungeonCoordinate().getX()) * 3 + 1] = roomSymbol;

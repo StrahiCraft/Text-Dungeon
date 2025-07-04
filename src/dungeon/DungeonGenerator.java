@@ -2,6 +2,7 @@ package dungeon;
 
 import dungeon.rooms.DungeonRoom;
 import dungeon.rooms.EmptyRoom;
+import dungeon.rooms.EnemyRoom;
 import entity.player.Player;
 import utility.Vector2Int;
 
@@ -67,6 +68,10 @@ public class DungeonGenerator {
                 dungeonRoom.setRoom(currentRoom, direction.reversed());
                 return null;
             }
+        }
+
+        if(Math.random() < 0.15f){
+            return new EnemyRoom(currentRoom.getPosition().add(direction));
         }
 
         return new EmptyRoom(currentRoom.getPosition().add(direction));

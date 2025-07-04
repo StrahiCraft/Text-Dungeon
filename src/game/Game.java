@@ -1,6 +1,7 @@
 package game;
 
 import dungeon.DungeonGenerator;
+import entity.enemy.EnemyGenerator;
 import entity.player.Player;
 import utility.Stats;
 
@@ -10,7 +11,9 @@ public class Game {
     private static boolean gameRunning = true;
 
     public static void gameLoop(){
-        Player player = new Player(new Stats(), "Player");
+        EnemyGenerator.generateEnemiesFromFiles();
+
+        Player player = new Player("Player", new Stats());
 
         DungeonGenerator.generateDungeon();
 
