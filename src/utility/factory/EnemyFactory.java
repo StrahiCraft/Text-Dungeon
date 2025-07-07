@@ -9,6 +9,11 @@ import utility.Stats;
  * from the main file when you add a new enemy type or change an existing one.
  */
 public class EnemyFactory {
+
+    public static void main(String[] args) {
+        createEnemyFiles();
+    }
+
     /**
      * Creates enemy files in the assets/enemies directory
      */

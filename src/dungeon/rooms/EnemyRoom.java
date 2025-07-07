@@ -1,6 +1,8 @@
 package dungeon.rooms;
 
+import dungeon.Dungeon;
 import entity.enemy.Enemy;
+import entity.enemy.EnemyGenerator;
 import entity.player.states.PlayerPreCombat;
 import entity.player.states.PlayerState;
 import graphics.Color;
@@ -47,6 +49,23 @@ public class EnemyRoom extends DungeonRoom {
 
     private void generateEnemies() {
         enemies = new ArrayList<Enemy>();
+
+        float remainingThreat = Dungeon.getCurrentDungeonThreat();
+
+        while(remainingThreat > 0) {
+            Enemy generatedEnemy = EnemyGenerator.generateEnemy(remainingThreat);
+
+            if(generatedEnemy == null){
+                return;
+            }
+
+            remainingThreat -= generatedEnemy.getThreatLevel();
+            enemies.add(generatedEnemy);
+
+            if(Math.random() < 0.25){
+                return;
+            }
+        }
     }
 
     public ArrayList<Enemy> getEnemies() {

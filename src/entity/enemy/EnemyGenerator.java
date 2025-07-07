@@ -3,6 +3,7 @@ package entity.enemy;
 import utility.file.FileReader;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
@@ -12,6 +13,22 @@ import java.util.Hashtable;
 public class EnemyGenerator {
     private static Dictionary<String, Float> enemiesByThreat = new Hashtable<>();
     private static Dictionary<String, Enemy> enemiesByInstance = new Hashtable<>();
+
+    public static Enemy generateEnemy(float maximumThreat){
+        ArrayList<Enemy> enemyCandidates = new ArrayList<Enemy>();
+
+        enemiesByThreat.keys().asIterator().forEachRemaining(enemyName ->{
+            if(enemiesByThreat.get(enemyName) < maximumThreat){
+                enemyCandidates.add(new Enemy(enemiesByInstance.get(enemyName)));
+            }
+        });
+
+        if(enemyCandidates.isEmpty()){
+            return null;
+        }
+
+        return enemyCandidates.get((int)(Math.random() * (enemyCandidates.size())));
+    }
 
     public static void generateEnemiesFromFiles(){
         File enemyAssetFolder =  new File("assets/enemies");

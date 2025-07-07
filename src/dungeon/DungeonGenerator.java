@@ -70,7 +70,7 @@ public class DungeonGenerator {
             }
         }
 
-        if(Math.random() < 0.15f){
+        if(Math.random() < 0.35f){
             return new EnemyRoom(currentRoom.getPosition().add(direction));
         }
 

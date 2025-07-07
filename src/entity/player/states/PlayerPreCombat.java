@@ -1,7 +1,5 @@
 package entity.player.states;
 
-import dungeon.DungeonMapRenderer;
-import dungeon.rooms.DungeonRoom;
 import entity.player.Player;
 
 import java.util.Scanner;
@@ -17,7 +15,7 @@ public class PlayerPreCombat extends PlayerState {
     @Override
     public boolean checkInput(String inputText, Scanner input) {
         if(inputText.equals("fight")){
-            // go into battle
+            Player.Instance.setCurrentState(new PlayerInCombat());
             return true;
         }
 

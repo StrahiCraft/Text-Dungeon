@@ -54,4 +54,12 @@ public class Player extends Entity {
     public void setPreviousRoom(DungeonRoom previousRoom) {
         this.previousRoom = previousRoom;
     }
+
+    public PlayerState getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(PlayerState currentState) {
+        this.currentState = currentState;
+    }
 }
