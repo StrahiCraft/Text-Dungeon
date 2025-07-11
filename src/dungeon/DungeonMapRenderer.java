@@ -71,7 +71,7 @@ public class DungeonMapRenderer {
     }
 
     private static void fillHallways(DungeonRoom currentRoom, Vector2Int direction, char[][] dungeonMap, DungeonBounds dungeonBounds) {
-        if(currentRoom.getRoom(direction) == null){
+        if(currentRoom.getNeighbouringRoom(direction) == null){
             return;
         }
 

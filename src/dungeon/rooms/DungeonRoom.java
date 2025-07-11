@@ -24,7 +24,7 @@ public abstract class DungeonRoom {
     public abstract PlayerState getRoomState();
     public abstract void onRoomEntered();
 
-    public void setRoom(DungeonRoom room, Vector2Int direction) {
+    public void setNeighbouringRoom(DungeonRoom room, Vector2Int direction) {
         if(direction == null) {
             System.out.println("ERROR! Direction is null.");
             return;
@@ -53,7 +53,7 @@ public abstract class DungeonRoom {
         System.out.println("ERROR! Invalid direction.");
     }
 
-    public DungeonRoom getRoom(Vector2Int direction) {
+    public DungeonRoom getNeighbouringRoom(Vector2Int direction) {
         if(direction == null) {
             System.out.println("ERROR! Direction is null.");
             return this;
@@ -149,5 +149,16 @@ public abstract class DungeonRoom {
 
     public void setRoomSymbol(char roomSymbol) {
         this.roomSymbol = roomSymbol;
+    }
+
+    @Override
+    public String toString() {
+        return "DungeonRoom{" +
+                "position=" + position +
+                ", descriptionText='" + descriptionText + '\'' +
+                ", flavourText='" + flavourText + '\'' +
+                ", roomSymbol=" + roomSymbol +
+                ", explored=" + explored +
+                '}';
     }
 }

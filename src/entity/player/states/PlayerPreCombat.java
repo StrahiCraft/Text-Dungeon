@@ -1,5 +1,8 @@
 package entity.player.states;
 
+import dungeon.Dungeon;
+import dungeon.rooms.EmptyRoom;
+import dungeon.rooms.EnemyRoom;
 import entity.player.Player;
 
 import java.util.Scanner;
@@ -15,7 +18,9 @@ public class PlayerPreCombat extends PlayerState {
     @Override
     public boolean checkInput(String inputText, Scanner input) {
         if(inputText.equals("fight")){
-            Player.Instance.setCurrentState(new PlayerInCombat());
+            //Player.Instance.setCurrentState(new PlayerInCombat());
+            Dungeon.setRoom(new EmptyRoom(Player.Instance.getCurrentRoom().getPosition()),
+                    Player.Instance.getCurrentRoom().getPosition());
             return true;
         }
 

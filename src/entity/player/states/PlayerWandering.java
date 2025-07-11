@@ -64,6 +64,6 @@ public class PlayerWandering extends PlayerState{
             return;
         }
 
-        Player.Instance.setCurrentRoom(Player.Instance.getCurrentRoom().getRoom(directionalDictionary.get(direction)));
+        Player.Instance.setCurrentRoom(Player.Instance.getCurrentRoom().getNeighbouringRoom(directionalDictionary.get(direction)));
     }
 }

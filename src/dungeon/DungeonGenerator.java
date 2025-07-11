@@ -34,7 +34,7 @@ public class DungeonGenerator {
     }
 
     private static void tryAddRoomOrConnection(DungeonRoom currentRoom, Stack<DungeonRoom> roomsToPropagate, Vector2Int direction) {
-        if(currentRoom.getRoom(direction) != null){
+        if(currentRoom.getNeighbouringRoom(direction) != null){
             return;
         }
 
@@ -48,8 +48,8 @@ public class DungeonGenerator {
             return;
         }
 
-        currentRoom.setRoom(newRoom, direction);
-        newRoom.setRoom(currentRoom, direction.reversed());
+        currentRoom.setNeighbouringRoom(newRoom, direction);
+        newRoom.setNeighbouringRoom(currentRoom, direction.reversed());
 
         if(Dungeon.getDungeonRooms().get(newRoom.getPosition().toString()) != null){
             return;
@@ -64,8 +64,8 @@ public class DungeonGenerator {
     private static DungeonRoom makeNewRoomConnection(DungeonRoom currentRoom, Vector2Int direction) {
         for (DungeonRoom dungeonRoom : Collections.list(Dungeon.getDungeonRooms().elements())) {
             if (dungeonRoom.getPosition().equalValue(currentRoom.getPosition().add(direction))) {
-                currentRoom.setRoom(dungeonRoom, direction);
-                dungeonRoom.setRoom(currentRoom, direction.reversed());
+                currentRoom.setNeighbouringRoom(dungeonRoom, direction);
+                dungeonRoom.setNeighbouringRoom(currentRoom, direction.reversed());
                 return null;
             }
         }

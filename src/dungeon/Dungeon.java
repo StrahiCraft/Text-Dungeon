@@ -2,6 +2,8 @@ package dungeon;
 
 import dungeon.rooms.DungeonRoom;
 import dungeon.utility.DungeonBounds;
+import entity.player.Player;
+import utility.Vector2Int;
 
 import java.util.*;
 
@@ -15,6 +17,34 @@ public class Dungeon {
 
     public static void resetDungeon(){
         currentDungeonThreat = startingDungeonThreat;
+    }
+
+    public static void setRoom(DungeonRoom newRoom, Vector2Int roomPosition){
+        DungeonRoom oldRoom = dungeonRooms.get(roomPosition.toString());
+
+        if(oldRoom.getNorthRoom() != null){
+            oldRoom.getNorthRoom().setSouthRoom(newRoom);
+        }
+        if(oldRoom.getEastRoom() != null){
+            oldRoom.getEastRoom().setWestRoom(newRoom);
+        }
+        if(oldRoom.getSouthRoom() != null){
+            oldRoom.getSouthRoom().setNorthRoom(newRoom);
+        }
+        if(oldRoom.getWestRoom() != null){
+            oldRoom.getWestRoom().setEastRoom(newRoom);
+        }
+
+        newRoom.setNorthRoom(oldRoom.getNorthRoom());
+        newRoom.setEastRoom(oldRoom.getEastRoom());
+        newRoom.setEastRoom(oldRoom.getSouthRoom());
+        newRoom.setWestRoom(oldRoom.getWestRoom());
+
+        dungeonRooms.put(roomPosition.toString(), newRoom);
+
+        if(Player.Instance.getCurrentRoom().getPosition().equalValue(roomPosition)){
+            Player.Instance.setCurrentRoom(newRoom);
+        }
     }
 
     public static void increaseDungeonThreat(){

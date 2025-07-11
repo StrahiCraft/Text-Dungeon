@@ -4,6 +4,9 @@ import dungeon.Dungeon;
 import dungeon.rooms.DungeonRoom;
 import entity.Entity;
 import entity.player.states.PlayerState;
+import game.Game;
+import graphics.Color;
+import graphics.TextRenderer;
 import utility.Stats;
 
 import java.util.Scanner;
@@ -23,7 +26,8 @@ public class Player extends Entity {
 
     @Override
     public void handleDeath() {
-
+        TextRenderer.printText(Color.getColor("red") + "GAME OVER" + Color.resetColor());
+        Game.setGameRunning(false);
     }
 
     public void getInput(Scanner input) {
