@@ -15,10 +15,7 @@ public class Enemy extends Entity implements utility.file.FileWriter, FileInterp
 
     public Enemy(Enemy enemy){
         setName(enemy.getName());
-        setStats(new Stats(enemy.getStats().getMaxHealth(),
-                enemy.getStats().getCurrentHealth(),
-                enemy.getStats().getArmor(),
-                enemy.getStats().getDamage()));
+        setStats(enemy.getStats());
 
         threatLevel = enemy.getThreatLevel();
 

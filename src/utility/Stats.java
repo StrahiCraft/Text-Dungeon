@@ -17,18 +17,36 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
 
     private float damage;
 
+    private float maxSpeed;
+    private float currentSpeed;
+
     public Stats() {
         maxHealth = 0;
         currentHealth = 0;
         armor = 0;
         damage = 0;
+        maxSpeed = 0;
+        currentSpeed = 0;
     }
 
-    public Stats(float maxHealth, float currentHealth, float armor, float damage) {
+    public Stats(Stats otherStats){
+        maxHealth = otherStats.getMaxHealth();
+        currentHealth = otherStats.getCurrentHealth();
+        armor = otherStats.getArmor();
+        damage = otherStats.getDamage();
+        maxSpeed = otherStats.getMaxSpeed();
+        currentSpeed = otherStats.getCurrentSpeed();
+    }
+
+    public Stats(float maxHealth, float currentHealth, float armor,
+                 float damage,
+                 float maxSpeed, float currentSpeed) {
         this.maxHealth = maxHealth;
         this.currentHealth = currentHealth;
         this.armor = armor;
         this.damage = damage;
+        this.maxSpeed = maxSpeed;
+        this.currentSpeed = currentSpeed;
     }
 
     @Override
@@ -44,6 +62,8 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
             fileWriter.append(currentHealth + "\n");
             fileWriter.append(armor + "\n");
             fileWriter.append(damage + "\n");
+            fileWriter.append(maxSpeed + "\n");
+            fileWriter.append(currentSpeed + "\n");
 
             fileWriter.close();
         } catch (IOException e) {
@@ -95,6 +115,26 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
         this.damage = damage;
     }
 
+    public float getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public void setMaxSpeed(float maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public float getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    public void setCurrentSpeed(float currentSpeed) {
+        if(currentSpeed < 0){
+            this.currentSpeed = 0;
+            return;
+        }
+        this.currentSpeed = currentSpeed;
+    }
+
     @Override
     public String toString() {
         return "Stats: " +
@@ -109,5 +149,7 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
         currentHealth = Float.parseFloat(fileData.get(1));
         armor = Float.parseFloat(fileData.get(2));
         damage = Float.parseFloat(fileData.get(3));
+        maxSpeed = Float.parseFloat(fileData.get(3));
+        currentSpeed = Float.parseFloat(fileData.get(3));
     }
 }
