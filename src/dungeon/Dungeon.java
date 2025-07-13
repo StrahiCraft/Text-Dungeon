@@ -37,7 +37,7 @@ public class Dungeon {
 
         newRoom.setNorthRoom(oldRoom.getNorthRoom());
         newRoom.setEastRoom(oldRoom.getEastRoom());
-        newRoom.setEastRoom(oldRoom.getSouthRoom());
+        newRoom.setSouthRoom(oldRoom.getSouthRoom());
         newRoom.setWestRoom(oldRoom.getWestRoom());
 
         dungeonRooms.put(roomPosition.toString(), newRoom);
