@@ -51,11 +51,11 @@ public abstract class PlayerState {
     }
 
     private void getHelp(Scanner input) {
-        String helpText = Color.getColor("bright yellow") + "List of current possible commands:\n" + Color.resetColor();
+        StringBuilder helpText = new StringBuilder(Color.getColor("bright yellow") + "List of current possible commands:\n" + Color.resetColor());
         for (String command : possibleCommands) {
-            helpText += command + "\n";
+            helpText.append(command).append("\n");
         }
-        TextRenderer.printText(helpText);
+        TextRenderer.printText(helpText.toString());
         getInput(input);
     }
 

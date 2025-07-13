@@ -18,6 +18,7 @@ public class PlayerWandering extends PlayerState{
     public PlayerWandering() {
         super();
         possibleCommands.add(Color.getColor("blue") + "map" + Color.resetColor());
+        possibleCommands.add(Color.getColor("green") + "inventory" + Color.resetColor());
 
         DungeonRoom currentRoom = Player.Instance.getCurrentRoom();
 
@@ -42,18 +43,21 @@ public class PlayerWandering extends PlayerState{
 
     @Override
     public boolean checkInput(String inputText, Scanner input) {
-        if(inputText.equals("map")){
-            TextRenderer.printText(DungeonMapRenderer.renderDungeonMap());
-            return true;
+        switch (inputText) {
+            case "map" -> {
+                TextRenderer.printText(DungeonMapRenderer.renderDungeonMap());
+                return true;
+            }
+            case "inventory" -> {
+                Player.Instance.setCurrentState(new PlayerInInventory());
+                return true;
+            }
+            case "north", "east", "south", "west" -> {
+                goToRoom(inputText, input);
+                return true;
+            }
         }
 
-        if(inputText.equals("north") ||
-                inputText.equals("east") ||
-                inputText.equals("south") ||
-                inputText.equals("west")){
-            goToRoom(inputText, input);
-            return true;
-        }
         return false;
     }
 

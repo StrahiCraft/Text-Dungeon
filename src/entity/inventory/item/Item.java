@@ -1,4 +1,4 @@
-package entity.inventory;
+package entity.inventory.item;
 
 import graphics.Color;
 
@@ -13,10 +13,10 @@ public abstract class Item {
 
     public Item(Item otherItem){
         name = otherItem.getName();
-        rarity = otherItem.getRarity();
+        rerollRarity();
     }
 
-    public Item(String name, Rarity rarity, int stackLimit) {
+    public Item(String name, Rarity rarity) {
         this.name = name;
         this.rarity = rarity;
     }
@@ -50,7 +50,7 @@ public abstract class Item {
             rarity = Rarity.MITHIC;
             return;
         }
-        rarity = Rarity.UNCOMMON;
+        rerollRarity();
     }
 
     public String getName() {
