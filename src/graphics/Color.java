@@ -1,5 +1,7 @@
 package graphics;
 
+import entity.inventory.Rarity;
+
 public class Color {
     public static String resetColor(){
         return "\u001B[0m";
@@ -14,25 +16,35 @@ public class Color {
      * an ANSI escape character for color
      */
     public static String getColor(String color){
-        switch(color.toLowerCase()){
-            case "black": return "\u001B[30m";
-            case "red": return "\u001B[31m";
-            case "green": return "\u001B[32m";
-            case "yellow": return "\u001B[33m";
-            case "blue": return "\u001B[34m";
-            case "magenta": return "\u001B[35m";
-            case "cyan": return "\u001B[36m";
-            case "white": return "\u001B[37m";
-            case "gray": return "\u001B[90m";
-            case "bright red": return "\u001B[91m";
-            case "bright green": return "\u001B[92m";
-            case "bright yellow": return "\u001B[93m";
-            case "bright blue": return "\u001B[94m";
-            case "bright magenta": return "\u001B[95m";
-            case "bright cyan": return "\u001B[96m";
-            case "bright white": return "\u001B[97m";
-            default: break;
-        }
-        return "\u001B[0m";
+        return switch (color.toLowerCase()) {
+            case "black" -> "\u001B[30m";
+            case "red" -> "\u001B[31m";
+            case "green" -> "\u001B[32m";
+            case "yellow" -> "\u001B[33m";
+            case "blue" -> "\u001B[34m";
+            case "magenta" -> "\u001B[35m";
+            case "cyan" -> "\u001B[36m";
+            case "white" -> "\u001B[37m";
+            case "gray" -> "\u001B[90m";
+            case "bright red" -> "\u001B[91m";
+            case "bright green" -> "\u001B[92m";
+            case "bright yellow" -> "\u001B[93m";
+            case "bright blue" -> "\u001B[94m";
+            case "bright magenta" -> "\u001B[95m";
+            case "bright cyan" -> "\u001B[96m";
+            case "bright white" -> "\u001B[97m";
+            default -> "\u001B[0m";
+        };
+    }
+
+    public static String getRarityColor(Rarity rarity){
+        return switch (rarity){
+            case COMMON -> getColor("gray");
+            case UNCOMMON -> getColor("green");
+            case RARE -> getColor("blue");
+            case EPIC -> getColor("magenta");
+            case LEGENDARY -> getColor("bright yellow");
+            case MITHIC -> getColor("bright red");
+        };
     }
 }
