@@ -49,6 +49,15 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
         this.currentSpeed = currentSpeed;
     }
 
+    public Stats(float maxHealth, float armor, float damage, float maxSpeed){
+        this.maxHealth = maxHealth;
+        currentHealth = maxHealth;
+        this.armor = armor;
+        this.damage = damage;
+        this.maxSpeed = maxSpeed;
+        currentSpeed = maxSpeed;
+    }
+
     @Override
     public void writeToFile() {
         System.out.println(Color.getColor("bright red") +
@@ -58,12 +67,10 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
     @Override
     public void writeToFile(FileWriter fileWriter) {
         try {
-            fileWriter.append(maxHealth + "\n");
-            fileWriter.append(currentHealth + "\n");
-            fileWriter.append(armor + "\n");
-            fileWriter.append(damage + "\n");
-            fileWriter.append(maxSpeed + "\n");
-            fileWriter.append(currentSpeed + "\n");
+            fileWriter.append("health=" + maxHealth + "\n");
+            fileWriter.append("armor=" + armor + "\n");
+            fileWriter.append("damage=" + damage + "\n");
+            fileWriter.append("speed=" + maxSpeed + "\n");
 
             fileWriter.close();
         } catch (IOException e) {
@@ -92,7 +99,7 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
     public void setCurrentHealth(float currentHealth) {
         this.currentHealth = currentHealth;
         if(currentHealth > maxHealth) {
-            currentHealth = maxHealth;
+            this.currentHealth = maxHealth;
         }
     }
 
@@ -146,10 +153,10 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
     @Override
     public void interpretFileData(ArrayList<String> fileData) {
         maxHealth = Float.parseFloat(fileData.get(0));
-        currentHealth = Float.parseFloat(fileData.get(1));
-        armor = Float.parseFloat(fileData.get(2));
-        damage = Float.parseFloat(fileData.get(3));
+        currentHealth = maxHealth;
+        armor = Float.parseFloat(fileData.get(1));
+        damage = Float.parseFloat(fileData.get(2));
         maxSpeed = Float.parseFloat(fileData.get(3));
-        currentSpeed = Float.parseFloat(fileData.get(3));
+        currentSpeed = maxSpeed;
     }
 }

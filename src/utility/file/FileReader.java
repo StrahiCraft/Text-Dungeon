@@ -20,7 +20,8 @@ public class FileReader {
             Scanner fileReader = new Scanner(file);
 
             while (fileReader.hasNextLine()) {
-                fileContents.add(fileReader.nextLine());
+                String fileLine = fileReader.nextLine();
+                fileContents.add(unFormatString(fileLine));
             }
 
             fileReader.close();
@@ -30,5 +31,10 @@ public class FileReader {
         }
 
         return fileContents;
+    }
+
+    private static String unFormatString(String formatedString){
+        String[] unformatedStringArray = formatedString.split("=");
+        return unformatedStringArray[unformatedStringArray.length - 1];
     }
 }

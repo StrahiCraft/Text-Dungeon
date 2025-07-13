@@ -18,7 +18,6 @@ public class Enemy extends Entity implements utility.file.FileWriter, FileInterp
         setStats(enemy.getStats());
 
         threatLevel = enemy.getThreatLevel();
-
     }
 
     public Enemy() {
@@ -47,7 +46,7 @@ public class Enemy extends Entity implements utility.file.FileWriter, FileInterp
             file.createNewFile();
 
             FileWriter fileWriter = new FileWriter(file);
-            fileWriter.write(getName() + "\n" + threatLevel + "\n");
+            fileWriter.write("name=" + getName() + "\nthreatLevel=" + threatLevel + "\n");
             getStats().writeToFile(fileWriter);
 
             fileWriter.close();
