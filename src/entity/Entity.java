@@ -91,6 +91,6 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-        return name + ", " +  stats;
+        return name + " " +  stats;
     }
 }

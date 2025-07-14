@@ -147,7 +147,8 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
         return "Stats: " +
                 currentHealth + "/" + maxHealth + Color.getColor("red") + "HP " + Color.resetColor() +
                 armor + Color.getColor("yellow") + " ARMOR " + Color.resetColor() +
-                damage + Color.getColor("magenta") + " DAMAGE" + Color.resetColor();
+                damage + Color.getColor("magenta") + " DAMAGE" + Color.resetColor() +
+                currentSpeed + "/" + maxSpeed + "SPEED";
     }
 
     @Override

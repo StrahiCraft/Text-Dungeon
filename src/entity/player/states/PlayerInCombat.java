@@ -13,11 +13,19 @@ public class PlayerInCombat extends PlayerState {
     public PlayerInCombat() {
         super();
 
+        possibleCommands.add("check");
+
         enemies = ((EnemyRoom)Player.Instance.getCurrentRoom()).getEnemies();
+
+        printCombatInfo();
     }
 
     @Override
     public boolean checkInput(String inputText, Scanner input) {
         return false;
+    }
+
+    private void printCombatInfo(){
+
     }
 }

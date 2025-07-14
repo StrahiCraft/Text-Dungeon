@@ -52,6 +52,10 @@ public class Inventory {
         return true;
     }
 
+    public void removeItem(Item item){
+        items.remove(item);
+    }
+
     public boolean removeItem(String itemName){
         return removeItem(itemName, null);
     }

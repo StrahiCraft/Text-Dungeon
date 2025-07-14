@@ -1,5 +1,8 @@
-package entity.inventory.item;
+package entity.inventory.item.equipment;
 
+import entity.inventory.item.Item;
+import entity.inventory.item.Rarity;
+import entity.player.Player;
 import utility.Stats;
 
 public class EquipItem extends Item {
@@ -26,7 +29,8 @@ public class EquipItem extends Item {
 
     @Override
     public void onUse() {
-
+        Player.Instance.getInventory().removeItem(this);
+        Player.Instance.getEquipment().equip(this);
     }
 
     public Stats getStatIncreases() {

@@ -4,14 +4,14 @@ import dungeon.Dungeon;
 import dungeon.rooms.DungeonRoom;
 import entity.Entity;
 import entity.inventory.Inventory;
+import entity.inventory.item.equipment.Equipment;
 import entity.player.states.PlayerState;
 import game.Game;
 import graphics.Color;
 import graphics.TextRenderer;
 import utility.Stats;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Player extends Entity {
     public static Player Instance;
@@ -21,12 +21,15 @@ public class Player extends Entity {
     private PlayerState currentState;
 
     private Inventory inventory;
+    private Equipment equipment;
 
     public Player(String name, Stats stats) {
         super(name, stats);
         Instance = this;
         currentRoom = Dungeon.getStartingRoom();
         inventory = new Inventory(10);
+
+        equipment = new Equipment();
     }
 
     @Override
@@ -78,5 +81,13 @@ public class Player extends Entity {
 
     public void setInventory(Inventory inventory) {
         this.inventory = inventory;
+    }
+
+    public Equipment getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(Equipment equipment) {
+        this.equipment = equipment;
     }
 }
