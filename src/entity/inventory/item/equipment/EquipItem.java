@@ -45,6 +45,11 @@ public class EquipItem extends Item {
         Player.Instance.getEquipment().equip(this);
     }
 
+    @Override
+    public void handleRarity() {
+        
+    }
+
     public void onEquip(){
         TextRenderer.printText("Equipped " + this);
     }

@@ -27,6 +27,7 @@ public abstract class Item implements utility.file.FileWriter, FileInterpreter {
     }
 
     public abstract void onUse();
+    public abstract void handleRarity();
 
     public void rerollRarity(){
         double roll = Math.random() * 100;

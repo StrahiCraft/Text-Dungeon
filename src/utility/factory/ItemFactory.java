@@ -158,15 +158,15 @@ public class ItemFactory {
         gorillaPotion.writeToFile();
 
         Potion heartGrowthPotion = new Potion(Color.getColor("bright red") + "Heart growth potion" + Color.resetColor(),
-                Rarity.COMMON, 30,
+                Rarity.COMMON, 20,
                 new Stats(5, 0, 0, 0, 0, 0));
-        scalePotion.writeToFile();
+        heartGrowthPotion.writeToFile();
     }
 
     private static void createTemporaryPotions(){
         TemporaryPotion turtlePotion = new TemporaryPotion(Color.getColor("yellow") + "Temporary " + Color.resetColor()
                 + "turtle potion", Rarity.COMMON, 100,
-                new Stats(0, 0, 100, 0, 0, 0));
+                new Stats(0, 0, 40, 0, 0, 0));
         turtlePotion.writeToFile();
 
         TemporaryPotion potionOfSwiftness = new TemporaryPotion(Color.getColor("yellow") + "Temporary " + Color.resetColor()
