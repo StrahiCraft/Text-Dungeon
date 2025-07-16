@@ -5,6 +5,7 @@ import entity.inventory.item.equipment.EquipItem;
 import entity.inventory.item.equipment.EquipmentSlot;
 import entity.inventory.item.potions.Potion;
 import entity.inventory.item.potions.TemporaryPotion;
+import entity.inventory.item.special.BundleOfGold;
 import graphics.Color;
 import utility.Stats;
 
@@ -12,6 +13,7 @@ public class ItemFactory {
     public static void main(String[] args) {
         createEquipItems();
         createPotions();
+        createSpecialItems();
     }
 
     // =================================================
@@ -173,5 +175,33 @@ public class ItemFactory {
                 + "potion of swiftness", Rarity.COMMON, 50,
                 new Stats(0, 0, 0, 0, 10, 10));
         potionOfSwiftness.writeToFile();
+    }
+
+    // =================================================
+    // Special
+    // =================================================
+
+    private static void createSpecialItems(){
+        createBundlesOfGold();
+    }
+
+    // =================================================
+    // Bundles of gold
+    // =================================================
+
+    private static void createBundlesOfGold(){
+        // Price must be -1 to not appear in shops
+
+        BundleOfGold smallBundle = new BundleOfGold("Small bundle of" + Color.getColor("yellow") +
+                " gold" + Color.resetColor(), Rarity.COMMON, -1, 1);
+        smallBundle.writeToFile();
+
+        BundleOfGold mediumBundle = new BundleOfGold("Medium bundle of" + Color.getColor("yellow") +
+                " gold" + Color.resetColor(), Rarity.COMMON, -1, 2.5f);
+        mediumBundle.writeToFile();
+
+        BundleOfGold largeBundle = new BundleOfGold("Large bundle of" + Color.getColor("yellow") +
+                " gold" + Color.resetColor(), Rarity.COMMON, -1, 5);
+        largeBundle.writeToFile();
     }
 }

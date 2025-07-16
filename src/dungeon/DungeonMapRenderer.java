@@ -48,8 +48,8 @@ public class DungeonMapRenderer {
                 [(dungeonBounds.getMaxDungeonCoordinate().getX() -
                 dungeonBounds.getMinDungeonCoordinate().getX() + 1) * 3];
 
-        for(int i = 0; i < dungeonMap.length; i++){
-            Arrays.fill(dungeonMap[i], ' ');
+        for (char[] chars : dungeonMap) {
+            Arrays.fill(chars, ' ');
         }
 
         for(DungeonRoom currentRoom : Collections.list(Dungeon.getDungeonRooms().elements())){
