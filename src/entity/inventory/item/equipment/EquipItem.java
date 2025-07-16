@@ -4,6 +4,7 @@ import entity.inventory.item.Item;
 import entity.inventory.item.Rarity;
 import entity.player.Player;
 import graphics.Color;
+import graphics.TextRenderer;
 import utility.Stats;
 
 import java.io.File;
@@ -21,6 +22,12 @@ public class EquipItem extends Item {
         equipmentSlot = EquipmentSlot.HEAD;
     }
 
+    public EquipItem(EquipItem otherItem){
+        super(otherItem);
+        statIncreases = otherItem.getStatIncreases();
+        equipmentSlot = otherItem.getEquipmentSlot();
+    }
+
     public EquipItem(Stats statIncreases, EquipmentSlot equipmentSlot) {
         super();
         this.statIncreases = statIncreases;
@@ -35,8 +42,15 @@ public class EquipItem extends Item {
 
     @Override
     public void onUse() {
-        Player.Instance.getInventory().removeItem(this);
         Player.Instance.getEquipment().equip(this);
+    }
+
+    public void onEquip(){
+        TextRenderer.printText("Equipped " + this);
+    }
+
+    public void onUnequip(){
+        TextRenderer.printText("Unequipped " + this);
     }
 
     @Override

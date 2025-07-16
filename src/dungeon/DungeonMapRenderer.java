@@ -31,6 +31,12 @@ public class DungeonMapRenderer {
         if(roomType == 'E'){
             return Color.getColor("red");
         }
+        if(roomType == 'L'){
+            return Color.getColor("light blue");
+        }
+        if(roomType == '$'){
+            return Color.getColor("light yellow");
+        }
         return Color.resetColor();
     }
 

@@ -25,9 +25,9 @@ public class Potion extends Item {
         this.statIncreases = statIncreases;
     }
 
-    public Potion(Item otherItem, Stats statIncreases) {
+    public Potion(Potion otherItem) {
         super(otherItem);
-        this.statIncreases = statIncreases;
+        statIncreases = otherItem.getStatIncreases();
     }
 
     public Potion(String name, Rarity rarity, int price, Stats statIncreases) {

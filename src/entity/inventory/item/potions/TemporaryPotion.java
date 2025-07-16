@@ -21,8 +21,8 @@ public class TemporaryPotion extends Potion {
         super(statIncreases);
     }
 
-    public TemporaryPotion(Item otherItem, Stats statIncreases) {
-        super(otherItem, statIncreases);
+    public TemporaryPotion(TemporaryPotion otherItem) {
+        super(otherItem);
     }
 
     public TemporaryPotion(String name, Rarity rarity, int price, Stats statIncreases) {

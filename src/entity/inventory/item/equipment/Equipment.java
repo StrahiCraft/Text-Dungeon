@@ -20,10 +20,17 @@ public class Equipment {
         equippedItems.get(EquipmentSlot.WEAPON);
     }
 
-    public void equip(EquipItem equipmentItem){
-        if(equippedItems.get(equipmentItem.getEquipmentSlot()) != null) {
-            Player.Instance.getInventory().addItem(equippedItems.get(equipmentItem.getEquipmentSlot()));
+    public void equip(EquipItem equipItem){
+        Player.Instance.getInventory().removeItem(equipItem);
+
+        if(equippedItems.get(equipItem.getEquipmentSlot()) != null) {
+            EquipItem unequippedItem = equippedItems.get(equipItem.getEquipmentSlot());
+            unequippedItem.onUnequip();
+            Player.Instance.getInventory().addItem(unequippedItem);
         }
+
+        equippedItems.put(equipItem.getEquipmentSlot(), equipItem);
+        equipItem.onEquip();
     }
 
     public Equipment(Dictionary<EquipmentSlot, EquipItem> equippedItems) {

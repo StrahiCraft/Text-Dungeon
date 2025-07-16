@@ -26,77 +26,64 @@ public class Inventory {
         this.items = items;
     }
 
-    /**
-     * Adds an item to the inventory.
-     * @param newItem
-     * The item that will be added.
-     * @return
-     * True if the item was added successfully and False if it wasn't / the inventory was full.
-     */
-    public boolean addItem(Item newItem){
+    public void addItem(Item newItem){
         if(items.size() + 1 > slotCount){
             TextRenderer.printText(Color.getColor("red") + "Inventory is full" + Color.resetColor());
-            return false;
+            return;
         }
         items.add(newItem);
-        return true;
     }
 
-    public boolean removeItem(int index){
+    public void removeItem(int index){
         if(index > items.size() || index < 1){
             TextRenderer.printText(Color.getColor("red") + "There is no item in that slot!" + Color.resetColor());
-            return false;
+            return;
         }
 
         items.remove(index - 1);
-        return true;
     }
 
     public void removeItem(Item item){
         items.remove(item);
     }
 
-    public boolean removeItem(String itemName){
-        return removeItem(itemName, null);
+    public void removeItem(String itemName){
+        removeItem(itemName, null);
     }
 
-    public boolean removeItem(String itemName, Rarity rarity) {
+    public void removeItem(String itemName, Rarity rarity) {
         Item itemToRemove = getItem(itemName, rarity);
 
         if(itemToRemove == null){
             TextRenderer.printText(Color.getColor("red") + "There is no such item!" + Color.resetColor());
-            return false;
+            return;
         }
 
         items.remove(itemToRemove);
-        return true;
     }
 
-    public boolean useItem(int index){
+    public void useItem(int index){
         if(index > items.size() || index < 1){
             TextRenderer.printText(Color.getColor("red") + "There is no item in that slot!" + Color.resetColor());
-            return false;
+            return;
         }
 
         items.get(index - 1).onUse();
-        items.remove(index - 1);
-        return true;
     }
 
-    public boolean useItem(String itemName){
-        return useItem(itemName, null);
+    public void useItem(String itemName){
+        useItem(itemName, null);
     }
 
-    public boolean useItem(String itemName, Rarity rarity) throws NullPointerException {
+    public void useItem(String itemName, Rarity rarity) throws NullPointerException {
         Item itemToUse = getItem(itemName, rarity);
 
         if(itemToUse == null){
             TextRenderer.printText(Color.getColor("red") + "There is no such item!" + Color.resetColor());
-            return false;
+            return;
         }
 
         itemToUse.onUse();
-        return removeItem(itemName, rarity);
     }
 
     /**
@@ -114,6 +101,10 @@ public class Inventory {
         }
 
         return null;
+    }
+
+    public boolean isFull(){
+        return items.size() == slotCount;
     }
 
     public int getSlotCount() {

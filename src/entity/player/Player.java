@@ -19,9 +19,12 @@ public class Player extends Entity {
     private DungeonRoom currentRoom;
     private DungeonRoom previousRoom;
     private PlayerState currentState;
+    private PlayerState previousState;
 
     private Inventory inventory;
     private Equipment equipment;
+
+    private int gold = 0;
 
     public Player(String name, Stats stats) {
         super(name, stats);
@@ -59,6 +62,14 @@ public class Player extends Entity {
         currentRoom.onRoomEntered();
     }
 
+    public void addGold(int amount){
+        gold += amount;
+
+        if(gold < 0){
+            gold = 0;
+        }
+    }
+
     public DungeonRoom getPreviousRoom() {
         return previousRoom;
     }
@@ -72,7 +83,16 @@ public class Player extends Entity {
     }
 
     public void setCurrentState(PlayerState currentState) {
+        previousState = this.currentState;
         this.currentState = currentState;
+    }
+
+    public PlayerState getPreviousState() {
+        return previousState;
+    }
+
+    public void setPreviousState(PlayerState previousState) {
+        this.previousState = previousState;
     }
 
     public Inventory getInventory() {
@@ -89,5 +109,13 @@ public class Player extends Entity {
 
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 }

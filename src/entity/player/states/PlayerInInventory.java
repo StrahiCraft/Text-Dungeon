@@ -1,6 +1,5 @@
 package entity.player.states;
 
-import entity.inventory.item.Rarity;
 import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;
@@ -11,9 +10,9 @@ public class PlayerInInventory extends PlayerState {
     public PlayerInInventory() {
         super();
         possibleCommands.add(Color.getColor("yellow") + "drop" + Color.resetColor() +
-                " either the index of the item or the name or name + the rarity of the item.");
+                " the index of the item.");
         possibleCommands.add(Color.getColor("green") + "use" + Color.resetColor() +
-                " either the index of the item or the name or name + the rarity of the item.");
+                " the index of the item.");
         possibleCommands.add(Color.getColor("red") + "close" + Color.resetColor());
 
         printInventory();
@@ -25,7 +24,8 @@ public class PlayerInInventory extends PlayerState {
 
         switch (splitText[0]){
             case "close" -> {
-                Player.Instance.setCurrentState(new PlayerWandering());
+                Player.Instance.setCurrentState(Player.Instance.getPreviousState());
+                TextRenderer.printText("Inventory " + Color.getColor("red") + "closed" + Color.resetColor());
                 return true;
             }
             case "use" -> {
@@ -36,56 +36,47 @@ public class PlayerInInventory extends PlayerState {
                 dropItem(splitText);
                 return true;
             }
+            case "unequip" -> {
+                // TODO add unequipping
+                return true;
+            }
         }
 
         return false;
     }
 
     private void useItem(String[] instructions) {
-        try{
-            int itemIndex = Integer.parseInt(instructions[1]);
-
-            Player.Instance.getInventory().useItem(itemIndex);
-            return;
-        } catch (NumberFormatException ignored){}
-
-        try {
-            Player.Instance.getInventory().
-                    useItem(instructions[1], Rarity.valueOf(instructions[2].toUpperCase()));
-            return;
-        } catch (IllegalArgumentException ignored){}
-
-        if(Player.Instance.getInventory().useItem(instructions[1])){
+        if(instructions.length != 2){
+            TextRenderer.printText("To use an item type in "
+                    + Color.getColor("green") + "use " + Color.resetColor() +
+                    "followed by the item index (number next to the item without the '.')");
             printInventory();
             return;
         }
 
-        TextRenderer.printText(Color.getColor("red" + "Something went wrong, try again." + Color.resetColor()));
+        Player.Instance.getInventory().useItem(Integer.parseInt(instructions[1]));
+        printInventory();
     }
 
     private void dropItem(String[] instructions) {
-        // TODO - add the ability for dropped items to appear in the current room
-        try{
-            int itemIndex = Integer.parseInt(instructions[1]);
-
-            Player.Instance.getInventory().removeItem(itemIndex);
-            return;
-        } catch (NumberFormatException ignored){}
-
-        try {
-            Player.Instance.getInventory().
-                    removeItem(instructions[1], Rarity.valueOf(instructions[2].toUpperCase()));
-            return;
-        } catch (IllegalArgumentException ignored){}
-
-        if(Player.Instance.getInventory().removeItem(instructions[1])){
+        if(instructions.length != 2){
+            TextRenderer.printText("To drop an item type in "
+                    + Color.getColor("yellow") + "drop " + Color.resetColor() +
+                    "followed by the item index (number next to the item without the '.')");
             printInventory();
             return;
         }
-        TextRenderer.printText(Color.getColor("red" + "Something went wrong, try again." + Color.resetColor()));
+
+        Player.Instance.getInventory().removeItem(Integer.parseInt(instructions[1]));
+        printInventory();
     }
 
-    private void printInventory(){
+    private void printInventory() {
+        TextRenderer.skipLine();
+        TextRenderer.printText("You can either " + Color.getColor("green") + "use " + Color.resetColor()
+        + "or " + Color.getColor("yellow") + "drop " + Color.resetColor() + "an item, " + Color.getColor("gray") +
+                "unequip " + Color.resetColor() + "an equip item, or " + Color.getColor("red") + "close " + Color.resetColor()
+        + "the inventory.");
         TextRenderer.printText(Player.Instance.getInventory().toString());
     }
 }
