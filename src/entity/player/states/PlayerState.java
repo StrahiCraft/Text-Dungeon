@@ -43,7 +43,7 @@ public abstract class PlayerState {
         }
 
         if(inputText.equals("quit")){
-            Game.setGameRunning(false);
+            Game.quitGame();
             return;
         }
 

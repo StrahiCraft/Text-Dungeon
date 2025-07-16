@@ -3,21 +3,13 @@ package utility.factory;
 import entity.enemy.Enemy;
 import utility.Stats;
 
-/**
- * A factory class for creating enemy types,
- * run the createEnemyFiles() function
- * from the main file when you add a new enemy type or change an existing one.
- */
 public class EnemyFactory {
 
     public static void main(String[] args) {
-        createEnemyFiles();
+        createEnemies();
     }
 
-    /**
-     * Creates enemy files in the assets/enemies directory
-     */
-    public static void createEnemyFiles(){
+    private static void createEnemies(){
         Enemy slime = new Enemy("Slime",
                 new Stats(2f, 2f, 0f,
                 1f,

@@ -1,24 +1,29 @@
 package entity.inventory.item;
 
 import graphics.Color;
+import utility.file.FileInterpreter;
 
-public abstract class Item {
+public abstract class Item implements utility.file.FileWriter, FileInterpreter {
     private String name;
     private Rarity rarity;
+    private int price;
 
     public Item() {
         name = "Item";
         rarity = Rarity.COMMON;
+        price = 0;
     }
 
     public Item(Item otherItem){
         name = otherItem.getName();
+        price = otherItem.getPrice();
         rerollRarity();
     }
 
-    public Item(String name, Rarity rarity) {
+    public Item(String name, Rarity rarity, int price) {
         this.name = name;
         this.rarity = rarity;
+        this.price = price;
     }
 
     public abstract void onUse();
@@ -67,6 +72,14 @@ public abstract class Item {
 
     public void setRarity(Rarity rarity) {
         this.rarity = rarity;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     @Override

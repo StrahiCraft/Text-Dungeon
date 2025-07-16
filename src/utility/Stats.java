@@ -80,6 +80,16 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
         }
     }
 
+    @Override
+    public void interpretFileData(ArrayList<String> fileData) {
+        maxHealth = Float.parseFloat(fileData.get(0));
+        currentHealth = maxHealth;
+        armor = Float.parseFloat(fileData.get(1));
+        damage = Float.parseFloat(fileData.get(2));
+        maxSpeed = Float.parseFloat(fileData.get(3));
+        currentSpeed = maxSpeed;
+    }
+
     public static float getMaxArmor() {
         return MAX_ARMOR;
     }
@@ -109,9 +119,6 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
 
     public void setArmor(float armor) {
         this.armor = armor;
-        if(armor > MAX_ARMOR) {
-            armor = MAX_ARMOR;
-        }
     }
 
     public float getDamage() {
@@ -149,15 +156,5 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
                 armor + Color.getColor("yellow") + " ARMOR " + Color.resetColor() +
                 damage + Color.getColor("magenta") + " DAMAGE" + Color.resetColor() +
                 currentSpeed + "/" + maxSpeed + "SPEED";
-    }
-
-    @Override
-    public void interpretFileData(ArrayList<String> fileData) {
-        maxHealth = Float.parseFloat(fileData.get(0));
-        currentHealth = maxHealth;
-        armor = Float.parseFloat(fileData.get(1));
-        damage = Float.parseFloat(fileData.get(2));
-        maxSpeed = Float.parseFloat(fileData.get(3));
-        currentSpeed = maxSpeed;
     }
 }

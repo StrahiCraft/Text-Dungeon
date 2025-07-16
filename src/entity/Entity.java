@@ -30,7 +30,9 @@ public abstract class Entity {
     }
 
     public void takeDamage(float damage) {
-        stats.setCurrentHealth(stats.getCurrentHealth() - damage * (stats.getArmor() / Stats.getMaxArmor()));
+        stats.setCurrentHealth(stats.getCurrentHealth() - damage + damage > 0? damage *
+                ((stats.getArmor() < Stats.getMaxArmor()? stats.getArmor() : Stats.getMaxArmor())
+                        / Stats.getMaxArmor()) : 0);
 
         if(stats.getCurrentHealth() <= 0) {
             handleDeath();
@@ -61,6 +63,23 @@ public abstract class Entity {
                 return;
             }
         }
+    }
+
+    public void increaseStats(Stats increase) {
+        getStats().setMaxHealth(getStats().getMaxHealth() + increase.getMaxHealth());
+        getStats().setCurrentHealth(getStats().getCurrentHealth() + increase.getCurrentHealth());
+        getStats().setArmor(getStats().getArmor() + increase.getArmor());
+        getStats().setDamage(getStats().getDamage() + increase.getDamage());
+        getStats().setMaxSpeed(getStats().getMaxSpeed() + increase.getMaxSpeed());
+        getStats().setCurrentSpeed(getStats().getCurrentSpeed() + increase.getCurrentSpeed());
+    }
+    public void decreaseStats(Stats decrease){
+        getStats().setMaxHealth(getStats().getMaxHealth()         -decrease.getMaxHealth());
+        getStats().setCurrentHealth(getStats().getCurrentHealth() -decrease.getCurrentHealth());
+        getStats().setArmor(getStats().getArmor()                 -decrease.getArmor());
+        getStats().setDamage(getStats().getDamage()               -decrease.getDamage());
+        getStats().setMaxSpeed(getStats().getMaxSpeed()           -decrease.getMaxSpeed());
+        getStats().setCurrentSpeed(getStats().getCurrentSpeed()   -decrease.getCurrentSpeed());
     }
 
     public abstract void handleDeath();

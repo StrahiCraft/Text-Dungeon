@@ -1,0 +1,6 @@
+name=[90mGorilla potion[0m
+price=30
+health=0.0
+armor=0.0
+damage=3.0
+speed=0.0

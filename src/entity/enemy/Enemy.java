@@ -40,6 +40,11 @@ public class Enemy extends Entity implements utility.file.FileWriter, FileInterp
     }
 
     @Override
+    public void writeToFile(FileWriter fileWriter) {
+        writeToFile();
+    }
+
+    @Override
     public void writeToFile() {
         try {
             File file = new File("assets/enemies/" + getName() + ".txt");
@@ -55,11 +60,6 @@ public class Enemy extends Entity implements utility.file.FileWriter, FileInterp
                     + Color.resetColor() + "assets/enemies" + getName() + ".txt");
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void writeToFile(FileWriter fileWriter) {
-        writeToFile();
     }
 
     @Override

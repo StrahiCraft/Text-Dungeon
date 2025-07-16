@@ -27,6 +27,10 @@ public class Game {
         input.close();
     }
 
+    public static void quitGame(){
+        setGameRunning(false);
+    }
+
     public static void setGameRunning(boolean gameRunning) {
         Game.gameRunning = gameRunning;
     }
