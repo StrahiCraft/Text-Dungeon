@@ -47,7 +47,14 @@ public class EquipItem extends Item {
 
     @Override
     public void handleRarity() {
-        
+        switch (getRarity()){
+            case COMMON ->    statIncreases.multiplyStats(0.85f);
+            case UNCOMMON ->  statIncreases.multiplyStats(1f);
+            case RARE ->      statIncreases.multiplyStats(1.25f);
+            case EPIC ->      statIncreases.multiplyStats(1.75f);
+            case LEGENDARY -> statIncreases.multiplyStats(3f);
+            case MITHIC ->    statIncreases.multiplyStats(5f);
+        }
     }
 
     public void onEquip(){

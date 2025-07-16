@@ -1,5 +1,6 @@
 package entity.player.states;
 
+import entity.player.Player;
 import game.Game;
 import graphics.Color;
 import graphics.TextRenderer;
@@ -12,6 +13,7 @@ public abstract class PlayerState {
 
     public PlayerState() {
         possibleCommands.add(Color.getColor("green") + "help" + Color.resetColor());
+        possibleCommands.add("check");
         possibleCommands.add(Color.getColor("red") + "quit" + Color.resetColor());
     }
 
@@ -37,17 +39,13 @@ public abstract class PlayerState {
     public abstract boolean checkInput(String inputText, Scanner input);
 
     private void defaultInputCheck(String inputText, Scanner input) {
-        if(inputText.equals("help")){
-            getHelp(input);
-            return;
+        switch (inputText) {
+            case "help" -> getHelp(input);
+            case "check" -> TextRenderer.printText(Player.Instance.getStats() + "\n" +
+                    Player.Instance.getEquipment());
+            case "quit" -> Game.quitGame();
+            default -> onRandomStuffInputted();
         }
-
-        if(inputText.equals("quit")){
-            Game.quitGame();
-            return;
-        }
-
-        onRandomStuffInputted();
     }
 
     private void getHelp(Scanner input) {

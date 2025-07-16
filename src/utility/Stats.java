@@ -90,6 +90,15 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
         currentSpeed = maxSpeed;
     }
 
+    public void multiplyStats(float multiplier){
+        maxHealth *= multiplier;
+        currentHealth *= multiplier;
+        armor *= multiplier;
+        damage *= multiplier;
+        maxSpeed *= multiplier;
+        currentSpeed *= multiplier;
+    }
+
     public static float getMaxArmor() {
         return MAX_ARMOR;
     }
@@ -151,10 +160,10 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
 
     @Override
     public String toString() {
-        return "Stats: " +
-                currentHealth + "/" + maxHealth + Color.getColor("red") + "HP " + Color.resetColor() +
-                armor + Color.getColor("yellow") + " ARMOR " + Color.resetColor() +
-                damage + Color.getColor("magenta") + " DAMAGE" + Color.resetColor() +
-                currentSpeed + "/" + maxSpeed + "SPEED";
+        return "Stats: | " +
+                currentHealth + "/" + maxHealth + Color.getColor("red") + " HP " + Color.resetColor() + "| " +
+                armor + Color.getColor("yellow") + " ARMOR " + Color.resetColor() +"| " +
+                damage + Color.getColor("magenta") + " DAMAGE " + Color.resetColor() + "| " +
+                currentSpeed + "/" + maxSpeed + " SPEED |";
     }
 }

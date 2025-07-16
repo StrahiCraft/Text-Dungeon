@@ -2,7 +2,6 @@ package entity.inventory.item.potions;
 
 import entity.inventory.item.Item;
 import entity.inventory.item.Rarity;
-import entity.inventory.item.equipment.EquipmentSlot;
 import entity.player.Player;
 import graphics.Color;
 import utility.Stats;
@@ -42,7 +41,14 @@ public class Potion extends Item {
 
     @Override
     public void handleRarity() {
-
+        switch (getRarity()){
+            case COMMON ->    statIncreases.multiplyStats(1f);
+            case UNCOMMON ->  statIncreases.multiplyStats(1.1f);
+            case RARE ->      statIncreases.multiplyStats(1.25f);
+            case EPIC ->      statIncreases.multiplyStats(1.5f);
+            case LEGENDARY -> statIncreases.multiplyStats(2f);
+            case MITHIC ->    statIncreases.multiplyStats(3f);
+        }
     }
 
     @Override
