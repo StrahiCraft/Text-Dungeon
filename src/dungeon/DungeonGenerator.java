@@ -4,6 +4,7 @@ import dungeon.rooms.*;
 import entity.player.Player;
 import utility.Vector2Int;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Hashtable;
 import java.util.Stack;
@@ -19,7 +20,7 @@ public class DungeonGenerator {
         generateLootRooms();
         generateShops();
 
-        addExit();
+        generateExit();
     }
 
     private static void generateEmptyDungeon(){
@@ -104,7 +105,35 @@ public class DungeonGenerator {
         }
     }
 
-    private static void addExit(){
+    private static void generateExit(){
+        int minimumNeighbouringRooms = 4;
+        ArrayList<DungeonRoom> exitCandidates = new ArrayList<>();
+        for (DungeonRoom dungeonRoom : Collections.list(Dungeon.getDungeonRooms().elements())){
+            if(dungeonRoom.getConnectionCount() <= minimumNeighbouringRooms){
+                exitCandidates.add(dungeonRoom);
+                continue;
+            }
+            if(dungeonRoom.getConnectionCount() < minimumNeighbouringRooms){
+                exitCandidates.clear();
+                exitCandidates.add(dungeonRoom);
+                minimumNeighbouringRooms = dungeonRoom.getConnectionCount();
+            }
+        }
 
+        if(exitCandidates.isEmpty()){
+            System.out.println("Error when generating dungeon exit.");
+            return;
+        }
+
+        DungeonRoom farthestRoom = Dungeon.getStartingRoom();
+
+        for(DungeonRoom dungeonRoom : exitCandidates){
+            if(Vector2Int.distanceFromZero(dungeonRoom.getPosition()) >
+                    Vector2Int.distanceFromZero(farthestRoom.getPosition())){
+                farthestRoom = dungeonRoom;
+            }
+        }
+
+        Dungeon.setRoom(new ExitRoom(), farthestRoom.getPosition());
     }
 }

@@ -29,6 +29,9 @@ public class Vector2Int {
     public static Vector2Int right() {
         return new Vector2Int(1, 0);
     }
+    public static int distanceFromZero(Vector2Int point){
+        return Math.abs(point.getX()) + Math.abs(point.getY());
+    }
 
     public Vector2Int add(Vector2Int other) {
         return new Vector2Int(this.x + other.x, this.y + other.y);
