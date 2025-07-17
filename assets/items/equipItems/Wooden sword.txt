@@ -1,5 +1,5 @@
 name=Wooden sword
-price=0
+price=1
 equipmentSlot=WEAPON
 health=0.0
 armor=0.0

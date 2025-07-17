@@ -109,7 +109,7 @@ public class Inventory {
             return null;
         }
 
-        return items.get(index);
+        return items.get(index - 1);
     }
 
     public boolean isFull(){

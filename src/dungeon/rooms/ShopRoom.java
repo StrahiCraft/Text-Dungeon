@@ -2,6 +2,7 @@ package dungeon.rooms;
 
 import entity.inventory.item.Item;
 import entity.inventory.item.ItemGenerator;
+import entity.player.Player;
 import entity.player.states.PlayerInShopRoom;
 import entity.player.states.PlayerState;
 import graphics.Color;
@@ -70,6 +71,7 @@ public class ShopRoom extends EmptyRoom {
 
     public void onItemBought(Item boughtItem){
         itemsForSale.remove(boughtItem);
+        Player.Instance.getInventory().addItem(boughtItem);
     }
 
     public ArrayList<Item> getItemsForSale() {
@@ -83,11 +85,12 @@ public class ShopRoom extends EmptyRoom {
     @Override
     public String toString() {
         StringBuilder shop = new StringBuilder();
+        int itemIndex = 1;
 
         shop.append("Welcome to my shop. Take a look at my wares:\n");
 
         for(Item item : itemsForSale){
-            shop.append(item).append('\n');
+            shop.append(itemIndex++).append(". ").append(item).append('\n');
         }
 
         return shop.toString();

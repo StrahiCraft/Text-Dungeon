@@ -31,14 +31,17 @@ public class PlayerInInventory extends PlayerState {
             }
             case "use" -> {
                 useItem(splitText);
+                printInventory();
                 return true;
             }
             case "drop" -> {
                 dropItem(splitText);
+                printInventory();
                 return true;
             }
             case "unequip" -> {
                 unequipItem(splitText);
+                printInventory();
                 return true;
             }
         }
@@ -51,12 +54,10 @@ public class PlayerInInventory extends PlayerState {
             TextRenderer.printText("To use an item type in "
                     + Color.getColor("green") + "use " + Color.resetColor() +
                     "followed by the item index (number next to the item without the '.')");
-            printInventory();
             return;
         }
 
         Player.Instance.getInventory().useItem(Integer.parseInt(instructions[1]));
-        printInventory();
     }
 
     private void dropItem(String[] instructions) {
@@ -64,12 +65,10 @@ public class PlayerInInventory extends PlayerState {
             TextRenderer.printText("To drop an item type in "
                     + Color.getColor("yellow") + "drop " + Color.resetColor() +
                     "followed by the item index (number next to the item without the '.')");
-            printInventory();
             return;
         }
 
         Player.Instance.getInventory().removeItem(Integer.parseInt(instructions[1]));
-        printInventory();
     }
 
     private void unequipItem(String[] instructions) {
@@ -78,7 +77,6 @@ public class PlayerInInventory extends PlayerState {
                     + Color.getColor("gray") + "unequip " + Color.resetColor() +
                     "followed by the name of the slot (must be one of the following:" +
                     " HEAD, BODY, HANDS, LEGS, FEET or WEAPON)");
-            printInventory();
             return;
         }
 
@@ -92,7 +90,6 @@ public class PlayerInInventory extends PlayerState {
                     "followed by the name of the slot\n(must be one of the following:" +
                     " HEAD, BODY, HANDS, LEGS, FEET or WEAPON)");
         }
-        printInventory();
     }
 
     protected void printInventory() {

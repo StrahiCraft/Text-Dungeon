@@ -21,7 +21,7 @@ public class ItemFactory {
     // =================================================
 
     private static void createWeapons(){
-        EquipItem woodenSword = new EquipItem("Wooden sword", Rarity.COMMON, 1,
+        EquipItem woodenSword = new EquipItem("Wooden sword", Rarity.COMMON, 2,
                 new Stats(0, 0, 0.5f, 0), EquipmentSlot.WEAPON);
         woodenSword.writeToFile();
 
