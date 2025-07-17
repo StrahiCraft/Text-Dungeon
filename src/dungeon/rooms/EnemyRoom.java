@@ -19,22 +19,12 @@ public class EnemyRoom extends DungeonRoom {
         super(position);
         this.enemies = enemies;
         setRoomSymbol('E');
-        setDescriptionText("You find yourself in a room with "
-                + Color.getColor("bright yellow") + enemies.size()
-                + Color.getColor("red") + " enemies" + Color.resetColor()
-                + ". You can either " + Color.getColor("bright red") + " fight " + Color.resetColor()
-                + "or " + Color.getColor("bright blue") + " flee " + Color.resetColor() + ".");
     }
 
     public EnemyRoom(Vector2Int position) {
         super(position);
         generateEnemies();
         setRoomSymbol('E');
-        setDescriptionText("You find yourself in a room with "
-                + Color.getColor("bright yellow") + enemies.size()
-                + Color.getColor("red") + " enemies" + Color.resetColor()
-                + ". You can either " + Color.getColor("bright red") + " fight " + Color.resetColor()
-                + "or " + Color.getColor("bright blue") + " flee " + Color.resetColor() + ".");
     }
 
     @Override
@@ -44,7 +34,11 @@ public class EnemyRoom extends DungeonRoom {
 
     @Override
     public void onRoomEntered() {
-        TextRenderer.printText(getDescriptionText());
+        TextRenderer.printText("You find yourself in a room with "
+                + Color.getColor("bright yellow") + enemies.size()
+                + Color.getColor("red") + " enemies" + Color.resetColor()
+                + ". You can either " + Color.getColor("bright red") + " fight " + Color.resetColor()
+                + "or " + Color.getColor("bright blue") + " flee " + Color.resetColor() + ".");
     }
 
     private void generateEnemies() {

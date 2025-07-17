@@ -12,18 +12,21 @@ public abstract class Item implements utility.file.FileWriter, FileInterpreter {
         name = "Item";
         rarity = Rarity.COMMON;
         price = 0;
+        handleRarity();
     }
 
     public Item(Item otherItem){
         name = otherItem.getName();
         price = otherItem.getPrice();
         rerollRarity();
+        handleRarity();
     }
 
     public Item(String name, Rarity rarity, int price) {
         this.name = name;
         this.rarity = rarity;
         this.price = price;
+        handleRarity();
     }
 
     public abstract void onUse();
@@ -86,6 +89,6 @@ public abstract class Item implements utility.file.FileWriter, FileInterpreter {
     @Override
     public String toString() {
         return Color.getRarityColor(rarity) + rarity.toString() + Color.resetColor()
-                + " " + name;
+                + " " + name + (price != -1? " " + price + Color.getColor("yellow") + "g" + Color.resetColor() : "");
     }
 }

@@ -5,7 +5,6 @@ import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;
 
-import javax.sql.rowset.serial.SerialStruct;
 import java.util.Scanner;
 
 public class PlayerInInventory extends PlayerState {
@@ -96,7 +95,7 @@ public class PlayerInInventory extends PlayerState {
         printInventory();
     }
 
-    private void printInventory() {
+    protected void printInventory() {
         TextRenderer.skipLine();
         TextRenderer.printText("You can either " + Color.getColor("green") + "use " + Color.resetColor()
         + "or " + Color.getColor("yellow") + "drop " + Color.resetColor() + "an item, " + Color.getColor("gray") +

@@ -1,0 +1,89 @@
+package dungeon.rooms;
+
+import entity.inventory.item.Item;
+import entity.inventory.item.ItemGenerator;
+import entity.player.states.PlayerInShopRoom;
+import entity.player.states.PlayerState;
+import graphics.Color;
+import graphics.TextRenderer;
+import utility.Vector2Int;
+
+import java.util.ArrayList;
+
+public class ShopRoom extends EmptyRoom {
+    private ArrayList<Item> itemsForSale;
+
+    public ShopRoom(Vector2Int position) {
+        super(position);
+
+        setRoomSymbol('$');
+        generateWares();
+    }
+
+    public ShopRoom(Vector2Int position, ArrayList<Item> itemsForSale) {
+        super(position);
+        this.itemsForSale = itemsForSale;
+
+        setRoomSymbol('$');
+    }
+
+    @Override
+    public PlayerState getRoomState() {
+        return new PlayerInShopRoom();
+    }
+
+    @Override
+    public void onRoomEntered() {
+        TextRenderer.printText("You find yourself in a room with a " + Color.getColor("magenta") +
+                "shop" + Color.resetColor() + "." + directionText());
+    }
+
+    private void generateWares(){
+        for(int i = 0; i < 6; i++){
+            Item itemForSale = ItemGenerator.generateItemInstance();
+
+            if(itemForSale == null){
+                continue;
+            }
+
+            if(itemForSale.getPrice() == -1){
+                continue;
+            }
+
+            itemsForSale.add(itemForSale);
+        }
+    }
+
+    public Item getItemForSale(int index){
+        if(index < 1 || index > itemsForSale.size()){
+            return null;
+        }
+
+        return itemsForSale.get(index - 1);
+    }
+
+    public void onItemBought(Item boughtItem){
+        itemsForSale.remove(boughtItem);
+    }
+
+    public ArrayList<Item> getItemsForSale() {
+        return itemsForSale;
+    }
+
+    public void setItemsForSale(ArrayList<Item> itemsForSale) {
+        this.itemsForSale = itemsForSale;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder shop = new StringBuilder();
+
+        shop.append("Welcome to my shop. Take a look at my wares:\n");
+
+        for(Item item : itemsForSale){
+            shop.append(item).append('\n');
+        }
+
+        return shop.toString();
+    }
+}

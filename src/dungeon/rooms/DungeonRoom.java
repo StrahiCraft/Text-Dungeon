@@ -6,8 +6,6 @@ import utility.Vector2Int;
 public abstract class DungeonRoom {
     private Vector2Int position;
 
-    private String descriptionText = "You find yourself in a room.";
-    private String flavourText = "";
     private char roomSymbol = '#';
 
     private boolean explored;
@@ -87,22 +85,6 @@ public abstract class DungeonRoom {
         this.position = position;
     }
 
-    public String getFlavourText() {
-        return flavourText;
-    }
-
-    public void setFlavourText(String flavourText) {
-        this.flavourText = flavourText;
-    }
-
-    public String getDescriptionText() {
-        return descriptionText;
-    }
-
-    public void setDescriptionText(String descriptionText) {
-        this.descriptionText = descriptionText;
-    }
-
     public DungeonRoom getNorthRoom() {
         return northRoom;
     }
@@ -155,8 +137,6 @@ public abstract class DungeonRoom {
     public String toString() {
         return "DungeonRoom{" +
                 "position=" + position +
-                ", descriptionText='" + descriptionText + '\'' +
-                ", flavourText='" + flavourText + '\'' +
                 ", roomSymbol=" + roomSymbol +
                 ", explored=" + explored +
                 '}';

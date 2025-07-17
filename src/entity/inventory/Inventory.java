@@ -103,6 +103,15 @@ public class Inventory {
         return null;
     }
 
+    public Item getItem(int index){
+        if(index > items.size() || index < 1){
+            TextRenderer.printText(Color.getColor("red") + "There is no item in that slot!" + Color.resetColor());
+            return null;
+        }
+
+        return items.get(index);
+    }
+
     public boolean isFull(){
         return items.size() == slotCount;
     }

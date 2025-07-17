@@ -4,7 +4,6 @@ import entity.inventory.item.Item;
 import entity.inventory.item.ItemGenerator;
 import entity.player.states.PlayerInLootRoom;
 import entity.player.states.PlayerState;
-import entity.player.states.PlayerWandering;
 import graphics.Color;
 import graphics.TextRenderer;
 import utility.Vector2Int;
@@ -33,10 +32,8 @@ public class LootRoom extends EmptyRoom {
 
     @Override
     public void onRoomEntered() {
-        super.onRoomEntered();
-
-        TextRenderer.printText("You also spot a chest! There could be" +
-                Color.getColor("bright blue") + " loot" + Color.resetColor() + " inside.");
+        TextRenderer.printText("You find yourself in a room with a chest! There could be" +
+                Color.getColor("bright blue") + " loot" + Color.resetColor() + " inside." + directionText());
     }
 
     public Item getLoot() {
