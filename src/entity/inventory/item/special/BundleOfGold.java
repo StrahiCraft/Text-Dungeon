@@ -6,6 +6,8 @@ import entity.inventory.item.Rarity;
 import entity.inventory.item.equipment.EquipmentSlot;
 import entity.player.Player;
 import graphics.Color;
+import graphics.TextRenderer;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -25,9 +27,9 @@ public class BundleOfGold extends Item {
         this.goldMultiplier = goldMultiplier;
     }
 
-    public BundleOfGold(Item otherItem, float goldMultiplier) {
+    public BundleOfGold(BundleOfGold otherItem) {
         super(otherItem);
-        this.goldMultiplier = goldMultiplier;
+        goldMultiplier = otherItem.goldMultiplier;
     }
 
     public BundleOfGold(String name, Rarity rarity, int price, float goldMultiplier) {
@@ -37,8 +39,12 @@ public class BundleOfGold extends Item {
 
     @Override
     public void onUse() {
-        Player.Instance.addGold((int)(Math.random() * 10 * Dungeon.getCurrentDungeonThreat() * goldMultiplier));
+        int goldIncrease = (int)(Math.random() * 10 * Dungeon.getCurrentDungeonThreat() * goldMultiplier);
+        Player.Instance.addGold(goldIncrease);
         Player.Instance.getInventory().removeItem(this);
+
+        TextRenderer.printText("Inside you find " +
+                Color.getColor("yellow") + goldIncrease + " gold" + Color.resetColor() + ".");
     }
 
     @Override

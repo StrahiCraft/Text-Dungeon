@@ -1,9 +1,11 @@
 package entity.player.states;
 
+import entity.inventory.item.equipment.EquipmentSlot;
 import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;
 
+import javax.sql.rowset.serial.SerialStruct;
 import java.util.Scanner;
 
 public class PlayerInInventory extends PlayerState {
@@ -37,7 +39,7 @@ public class PlayerInInventory extends PlayerState {
                 return true;
             }
             case "unequip" -> {
-                // TODO add unequipping
+                unequipItem(splitText);
                 return true;
             }
         }
@@ -68,6 +70,29 @@ public class PlayerInInventory extends PlayerState {
         }
 
         Player.Instance.getInventory().removeItem(Integer.parseInt(instructions[1]));
+        printInventory();
+    }
+
+    private void unequipItem(String[] instructions) {
+        if(instructions.length != 2){
+            TextRenderer.printText("To unequip an item type in "
+                    + Color.getColor("gray") + "unequip " + Color.resetColor() +
+                    "followed by the name of the slot (must be one of the following:" +
+                    " HEAD, BODY, HANDS, LEGS, FEET or WEAPON)");
+            printInventory();
+            return;
+        }
+
+        try{
+            EquipmentSlot equipmentSlot = EquipmentSlot.valueOf(instructions[1].toUpperCase());
+            Player.Instance.getEquipment().unequip(equipmentSlot);
+        }
+        catch (IllegalArgumentException e){
+            TextRenderer.printText("To unequip an item type in "
+                    + Color.getColor("gray") + "unequip " + Color.resetColor() +
+                    "followed by the name of the slot\n(must be one of the following:" +
+                    " HEAD, BODY, HANDS, LEGS, FEET or WEAPON)");
+        }
         printInventory();
     }
 

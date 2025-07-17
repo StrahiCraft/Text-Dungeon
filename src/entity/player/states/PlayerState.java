@@ -41,7 +41,9 @@ public abstract class PlayerState {
     private void defaultInputCheck(String inputText, Scanner input) {
         switch (inputText) {
             case "help" -> getHelp(input);
-            case "check" -> TextRenderer.printText(Player.Instance.getStats() + "\n" +
+            case "check" -> TextRenderer.printText(Color.getColor("yellow") + "Gold: " +
+                    Color.resetColor() + Player.Instance.getGold() + "\n" +
+                    Player.Instance.getStats() + "\n" +
                     Player.Instance.getEquipment());
             case "quit" -> Game.quitGame();
             default -> onRandomStuffInputted();

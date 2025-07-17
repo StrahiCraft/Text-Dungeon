@@ -3,6 +3,7 @@ package entity.inventory.item;
 import entity.inventory.item.equipment.EquipItem;
 import entity.inventory.item.potions.Potion;
 import entity.inventory.item.potions.TemporaryPotion;
+import entity.inventory.item.special.BundleOfGold;
 import utility.file.FileReader;
 
 import java.io.File;
@@ -18,13 +19,16 @@ public class ItemGenerator {
         Item selectedItem = items.get((int)(Math.random() * items.size()));
 
         if (selectedItem.getClass().equals(EquipItem.class)) {
-            return new EquipItem((EquipItem) selectedItem);
+            return new EquipItem((EquipItem)selectedItem);
         }
         if (selectedItem.getClass().equals(Potion.class)) {
             return new Potion((Potion)selectedItem);
         }
         if (selectedItem.getClass().equals(TemporaryPotion.class)) {
-            return new TemporaryPotion((TemporaryPotion) selectedItem);
+            return new TemporaryPotion((TemporaryPotion)selectedItem);
+        }
+        if (selectedItem.getClass().equals(BundleOfGold.class)) {
+            return new BundleOfGold((BundleOfGold)selectedItem);
         }
         return null;
     }
@@ -33,6 +37,7 @@ public class ItemGenerator {
         generateEquipItems();
         generatePotions();
         generateTemporaryPotions();
+        generateBundlesOfGold();
     }
 
     private static void generateEquipItems(){
@@ -73,8 +78,23 @@ public class ItemGenerator {
         }
     }
 
-    private static Potion getTemporaryPotionFromFile(File itemFile){
+    private static TemporaryPotion getTemporaryPotionFromFile(File itemFile){
         TemporaryPotion newItem = new TemporaryPotion();
+        newItem.interpretFileData(FileReader.readFile(itemFile));
+
+        return newItem;
+    }
+
+    private static void generateBundlesOfGold(){
+        File itemTypeFolder =  new File("assets/items/special");
+
+        for(File currentItemFile : itemTypeFolder.listFiles()) {
+            items.add(getBundleOfGoldFromFile(currentItemFile));
+        }
+    }
+
+    private static BundleOfGold getBundleOfGoldFromFile(File itemFile){
+        BundleOfGold newItem = new BundleOfGold();
         newItem.interpretFileData(FileReader.readFile(itemFile));
 
         return newItem;

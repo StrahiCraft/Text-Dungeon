@@ -35,7 +35,7 @@ public class TemporaryPotion extends Potion {
             TextRenderer.printText("Temporary potions can only be used while in combat.");
             return;
         }
-        Player.Instance.increaseStats(getStatIncreases());
+        super.onUse();
         // TODO remove stat increase after one combat turn
     }
 

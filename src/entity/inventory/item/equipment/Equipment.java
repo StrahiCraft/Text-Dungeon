@@ -2,6 +2,7 @@ package entity.inventory.item.equipment;
 
 import entity.player.Player;
 import graphics.Color;
+import graphics.TextRenderer;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -31,6 +32,24 @@ public class Equipment {
 
         equippedItems.put(equipItem.getEquipmentSlot(), equipItem);
         equipItem.onEquip();
+    }
+
+    public void unequip(EquipmentSlot equipmentSlot) {
+        if(Player.Instance.getInventory().isFull()) {
+            TextRenderer.printText("Cannot" +
+                    Color.getColor("gray") + " unequip," + Color.resetColor() +
+                    Color.getColor("red") + " inventory is full." + Color.resetColor());
+            return;
+        }
+
+        if(equippedItems.get(equipmentSlot) == null) {
+            TextRenderer.printText("Equipment slot " + equipmentSlot + " is empty.");
+            return;
+        }
+
+        EquipItem unequippedItem = equippedItems.get(equipmentSlot);
+        unequippedItem.onUnequip();
+        Player.Instance.getInventory().addItem(unequippedItem);
     }
 
     public Equipment(Dictionary<EquipmentSlot, EquipItem> equippedItems) {

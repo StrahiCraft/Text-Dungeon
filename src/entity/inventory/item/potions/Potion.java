@@ -37,6 +37,7 @@ public class Potion extends Item {
     @Override
     public void onUse() {
         Player.Instance.increaseStats(statIncreases);
+        Player.Instance.getInventory().removeItem(this);
     }
 
     @Override
