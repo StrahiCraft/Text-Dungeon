@@ -8,15 +8,12 @@ import utility.Vector2Int;
 import java.util.*;
 
 public class Dungeon {
-    private static final float startingDungeonThreat = 0.5f;
-    private static final float perFloorThreatIncrease = 0.1f;
-    private static float currentDungeonThreat = startingDungeonThreat;
-
     private static Dictionary<String, DungeonRoom> dungeonRooms = new Hashtable<>();
     private static DungeonBounds dungeonBounds = new DungeonBounds();
+    private static DungeonStats dungeonStats = new DungeonStats();
 
     public static void resetDungeon(){
-        currentDungeonThreat = startingDungeonThreat;
+        dungeonStats.resetDungeonStats();
     }
 
     public static void setRoom(DungeonRoom newRoom, Vector2Int roomPosition){
@@ -40,6 +37,8 @@ public class Dungeon {
         newRoom.setSouthRoom(oldRoom.getSouthRoom());
         newRoom.setWestRoom(oldRoom.getWestRoom());
 
+        newRoom.setPosition(roomPosition);
+
         dungeonRooms.put(roomPosition.toString(), newRoom);
 
         if(Player.Instance.getCurrentRoom().getPosition().equalValue(roomPosition)){
@@ -47,16 +46,23 @@ public class Dungeon {
         }
     }
 
-    public static void increaseDungeonThreat(){
-        currentDungeonThreat += perFloorThreatIncrease;
+    public static DungeonRoom getRandomRoom(){
+        ArrayList<DungeonRoom> rooms = Collections.list(dungeonRooms.elements());
+        rooms.remove(dungeonRooms.get(new Vector2Int().toString()));
+
+        return rooms.get((int)(Math.random() * rooms.size()));
+    }
+
+    public static DungeonRoom getStartingRoom(){
+        return dungeonRooms.get("x=0, y=0");
+    }
+
+    public static void progressFloor(){
+        dungeonStats.progressFloor();
     }
 
     public static float getCurrentDungeonThreat() {
-        return currentDungeonThreat;
-    }
-
-    public static void setCurrentDungeonThreat(float currentDungeonThreat) {
-        Dungeon.currentDungeonThreat = currentDungeonThreat;
+        return dungeonStats.getCurrentThreat();
     }
 
     public static Dictionary<String, DungeonRoom> getDungeonRooms() {
@@ -75,7 +81,11 @@ public class Dungeon {
         Dungeon.dungeonRooms = dungeonRooms;
     }
 
-    public static DungeonRoom getStartingRoom(){
-        return dungeonRooms.get("x=0, y=0");
+    public static DungeonStats getDungeonStats() {
+        return dungeonStats;
+    }
+
+    public static void setDungeonStats(DungeonStats dungeonStats) {
+        Dungeon.dungeonStats = dungeonStats;
     }
 }

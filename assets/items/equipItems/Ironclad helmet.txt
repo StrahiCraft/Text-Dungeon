@@ -1,7 +1,7 @@
 name=Ironclad helmet
-price=25
+price=21
 equipmentSlot=HEAD
-health=15.0
-armor=7.0
+health=12.75
+armor=5.9500003
 damage=0.0
-speed=-4.0
+speed=-3.4

@@ -15,6 +15,11 @@ public class EnemyRoom extends DungeonRoom {
 
     private ArrayList<Enemy> enemies;
 
+    public EnemyRoom() {
+        generateEnemies();
+        setRoomSymbol('E');
+    }
+
     public EnemyRoom(Vector2Int position, ArrayList<Enemy> enemies) {
         super(position);
         this.enemies = enemies;

@@ -8,6 +8,9 @@ import utility.Vector2Int;
 
 public class EmptyRoom extends DungeonRoom {
 
+    public EmptyRoom() {
+
+    }
     public EmptyRoom(Vector2Int position) {
         super(position);
     }

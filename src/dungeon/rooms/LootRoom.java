@@ -11,17 +11,21 @@ import utility.Vector2Int;
 public class LootRoom extends EmptyRoom {
     private Item loot;
 
+    public LootRoom() {
+        loot = ItemGenerator.generateItemInstance();
+
+        setRoomSymbol('L');
+    }
+
     public LootRoom(Vector2Int position) {
         super(position);
         loot = ItemGenerator.generateItemInstance();
-
         setRoomSymbol('L');
     }
 
     public LootRoom(Vector2Int position, Item loot) {
         super(position);
         this.loot = loot;
-
         setRoomSymbol('L');
     }
 

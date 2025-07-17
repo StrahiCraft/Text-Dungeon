@@ -43,12 +43,29 @@ public class Potion extends Item {
     @Override
     public void handleRarity() {
         switch (getRarity()){
-            case COMMON ->    statIncreases.multiplyStats(1f);
-            case UNCOMMON ->  statIncreases.multiplyStats(1.1f);
-            case RARE ->      statIncreases.multiplyStats(1.25f);
-            case EPIC ->      statIncreases.multiplyStats(1.5f);
-            case LEGENDARY -> statIncreases.multiplyStats(2f);
-            case MITHIC ->    statIncreases.multiplyStats(3f);
+            case COMMON -> {
+                statIncreases.multiplyStats(1f);
+            }
+            case UNCOMMON -> {
+                statIncreases.multiplyStats(1.1f);
+                setPrice((int)((float)getPrice() * 1.1f));
+            }
+            case RARE -> {
+                statIncreases.multiplyStats(1.25f);
+                setPrice((int)((float)getPrice() * 1.25f));
+            }
+            case EPIC -> {
+                statIncreases.multiplyStats(1.5f);
+                setPrice((int)((float)getPrice() * 1.5f));
+            }
+            case LEGENDARY -> {
+                statIncreases.multiplyStats(2f);
+                setPrice((int)((float)getPrice() * 2f));
+            }
+            case MITHIC -> {
+                statIncreases.multiplyStats(3f);
+                setPrice((int)((float)getPrice() * 3f));
+            }
         }
     }
 

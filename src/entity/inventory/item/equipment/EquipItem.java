@@ -20,24 +20,28 @@ public class EquipItem extends Item {
         super();
         statIncreases = new Stats();
         equipmentSlot = EquipmentSlot.HEAD;
+        handleRarity();
     }
 
     public EquipItem(EquipItem otherItem){
         super(otherItem);
         statIncreases = otherItem.getStatIncreases();
         equipmentSlot = otherItem.getEquipmentSlot();
+        handleRarity();
     }
 
     public EquipItem(Stats statIncreases, EquipmentSlot equipmentSlot) {
         super();
         this.statIncreases = statIncreases;
         this.equipmentSlot = equipmentSlot;
+        handleRarity();
     }
 
     public EquipItem(String name, Rarity rarity, int price, Stats statIncreases, EquipmentSlot equipmentSlot) {
         super(name, rarity, price);
         this.statIncreases = statIncreases;
         this.equipmentSlot = equipmentSlot;
+        handleRarity();
     }
 
     @Override
@@ -48,12 +52,29 @@ public class EquipItem extends Item {
     @Override
     public void handleRarity() {
         switch (getRarity()){
-            case COMMON ->    statIncreases.multiplyStats(0.85f);
-            case UNCOMMON ->  statIncreases.multiplyStats(1f);
-            case RARE ->      statIncreases.multiplyStats(1.25f);
-            case EPIC ->      statIncreases.multiplyStats(1.75f);
-            case LEGENDARY -> statIncreases.multiplyStats(3f);
-            case MITHIC ->    statIncreases.multiplyStats(5f);
+            case COMMON -> {
+                statIncreases.multiplyStats(0.85f);
+                setPrice((int)((float)getPrice() * 0.85f));
+            }
+            case UNCOMMON -> {
+                statIncreases.multiplyStats(1f);
+            }
+            case RARE -> {
+                statIncreases.multiplyStats(1.25f);
+                setPrice((int)((float)getPrice() * 1.25f));
+            }
+            case EPIC -> {
+                statIncreases.multiplyStats(1.75f);
+                setPrice((int)((float)getPrice() * 1.75f));
+            }
+            case LEGENDARY -> {
+                statIncreases.multiplyStats(3f);
+                setPrice((int)((float)getPrice() * 3f));
+            }
+            case MITHIC -> {
+                statIncreases.multiplyStats(5f);
+                setPrice((int)((float)getPrice() * 5f));
+            }
         }
     }
 

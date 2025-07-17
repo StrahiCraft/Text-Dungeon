@@ -13,6 +13,11 @@ import java.util.ArrayList;
 public class ShopRoom extends EmptyRoom {
     private ArrayList<Item> itemsForSale;
 
+    public ShopRoom(){
+        setRoomSymbol('$');
+        generateWares();
+    }
+
     public ShopRoom(Vector2Int position) {
         super(position);
 
@@ -39,6 +44,7 @@ public class ShopRoom extends EmptyRoom {
     }
 
     private void generateWares(){
+        itemsForSale = new ArrayList<>(0);
         for(int i = 0; i < 6; i++){
             Item itemForSale = ItemGenerator.generateItemInstance();
 

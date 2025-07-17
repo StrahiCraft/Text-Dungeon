@@ -8,12 +8,16 @@ public abstract class DungeonRoom {
 
     private char roomSymbol = '#';
 
-    private boolean explored;
+    private boolean explored = true;
 
     private DungeonRoom northRoom;
     private DungeonRoom eastRoom;
     private DungeonRoom southRoom;
     private DungeonRoom westRoom;
+
+    public DungeonRoom(){
+
+    }
 
     public DungeonRoom(Vector2Int position) {
         this.position = position;
@@ -75,6 +79,23 @@ public abstract class DungeonRoom {
 
         System.out.println("ERROR! Invalid direction.");
         return this;
+    }
+
+    public int getConnectionCount(){
+        int connectionCount = 0;
+        if(northRoom != null){
+            connectionCount++;
+        }
+        if(eastRoom != null){
+            connectionCount++;
+        }
+        if(southRoom != null){
+            connectionCount++;
+        }
+        if(westRoom != null){
+            connectionCount++;
+        }
+        return connectionCount;
     }
 
     public Vector2Int getPosition() {

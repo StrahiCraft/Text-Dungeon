@@ -1,9 +1,6 @@
 package dungeon;
 
-import dungeon.rooms.DungeonRoom;
-import dungeon.rooms.EmptyRoom;
-import dungeon.rooms.EnemyRoom;
-import dungeon.rooms.LootRoom;
+import dungeon.rooms.*;
 import entity.player.Player;
 import utility.Vector2Int;
 
@@ -12,17 +9,27 @@ import java.util.Hashtable;
 import java.util.Stack;
 
 public class DungeonGenerator {
-    private static final int MAX_ROOMS = 20;
-
     public static void generateDungeon(){
         Dungeon.setDungeonRooms(new Hashtable<>());
 
-        Stack<DungeonRoom> roomsToPropagate = new Stack<DungeonRoom>();
+        generateEmptyDungeon();
+        Player.Instance.setCurrentRoom(Dungeon.getStartingRoom());
+
+        generateEnemyRooms();
+        generateLootRooms();
+        generateShops();
+
+        addExit();
+    }
+
+    private static void generateEmptyDungeon(){
+        Stack<DungeonRoom> roomsToPropagate = new Stack<>();
 
         Dungeon.getDungeonRooms().put(new Vector2Int().toString(), new EmptyRoom(new Vector2Int(0, 0)));
         roomsToPropagate.push(Dungeon.getDungeonRooms().get(new Vector2Int().toString()));
 
-        while(Dungeon.getDungeonRooms().size() <= MAX_ROOMS && !roomsToPropagate.isEmpty()){
+        while(Dungeon.getDungeonRooms().size() <= Dungeon.getDungeonStats().getMaxRooms() &&
+                !roomsToPropagate.isEmpty()){
             DungeonRoom currentRoom = roomsToPropagate.pop();
 
             tryAddRoomOrConnection(currentRoom, roomsToPropagate, Vector2Int.up());
@@ -30,8 +37,6 @@ public class DungeonGenerator {
             tryAddRoomOrConnection(currentRoom, roomsToPropagate, Vector2Int.left());
             tryAddRoomOrConnection(currentRoom, roomsToPropagate, Vector2Int.right());
         }
-
-        Player.Instance.setCurrentRoom(Dungeon.getStartingRoom());
     }
 
     private static void tryAddRoomOrConnection(DungeonRoom currentRoom, Stack<DungeonRoom> roomsToPropagate, Vector2Int direction) {
@@ -39,7 +44,8 @@ public class DungeonGenerator {
             return;
         }
 
-        if(Math.random() * 100.0 >= (MAX_ROOMS - Dungeon.getDungeonRooms().size() - 1) * (100.0 / MAX_ROOMS)) {
+        if(Math.random() * 100.0 >= (Dungeon.getDungeonStats().getMaxRooms()
+                - Dungeon.getDungeonRooms().size() - 1) * (100.0 / Dungeon.getDungeonStats().getMaxRooms())) {
             return;
         }
 
@@ -71,14 +77,34 @@ public class DungeonGenerator {
             }
         }
 
-        if(Math.random() < 0.35f){
-            return new LootRoom(currentRoom.getPosition().add(direction));
-        }
-
-        if(Math.random() < 0.35f){
-            return new EnemyRoom(currentRoom.getPosition().add(direction));
-        }
-
         return new EmptyRoom(currentRoom.getPosition().add(direction));
+    }
+
+    private static void generateEnemyRooms(){
+        int roomsToGenerate = (int)(Dungeon.getDungeonRooms().size() * Dungeon.getDungeonStats().getEnemyRoomChance());
+
+        for(int i = 0; i < roomsToGenerate; i++) {
+            Dungeon.setRoom(new EnemyRoom(), Dungeon.getRandomRoom().getPosition());
+        }
+    }
+
+    private static void generateLootRooms(){
+        int roomsToGenerate = (int)(Dungeon.getDungeonRooms().size() * Dungeon.getDungeonStats().getLootRoomChance());
+
+        for(int i = 0; i < roomsToGenerate; i++) {
+            Dungeon.setRoom(new LootRoom(), Dungeon.getRandomRoom().getPosition());
+        }
+    }
+
+    private static void generateShops(){
+        int roomsToGenerate = (int)(Dungeon.getDungeonRooms().size() * Dungeon.getDungeonStats().getShopChance());
+
+        for(int i = 0; i < roomsToGenerate; i++) {
+            Dungeon.setRoom(new ShopRoom(), Dungeon.getRandomRoom().getPosition());
+        }
+    }
+
+    private static void addExit(){
+
     }
 }
