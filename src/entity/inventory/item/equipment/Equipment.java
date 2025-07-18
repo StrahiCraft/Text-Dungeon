@@ -22,8 +22,15 @@ public class Equipment {
     }
 
     public void equip(EquipItem equipItem){
-        if(Player.Instance.getStats().getMaxSpeed() + equipItem.getStatIncreases().getMaxSpeed() <= 0) {
-            TextRenderer.printText(Color.getColor("red") + "You will be to heavy to fight with that equipped!"
+        float maxSpeedPostEquip = Player.Instance.getStats().getMaxSpeed() + equipItem.getStatIncreases().getMaxSpeed();
+
+        EquipItem equippedItem = equippedItems.get(equipItem.getEquipmentSlot());
+        if(equippedItem != null){
+            maxSpeedPostEquip -= equippedItem.getStatIncreases().getMaxSpeed();
+        }
+
+        if(maxSpeedPostEquip <= 0) {
+            TextRenderer.printText(Color.getColor("red") + "You will be too slow to fight with that equipped!"
                     + Color.resetColor() + "\nGet faster if you wish to use it.");
             return;
         }
@@ -51,6 +58,18 @@ public class Equipment {
         if(equippedItems.get(equipmentSlot) == null) {
             TextRenderer.printText("Equipment slot " + equipmentSlot + " is empty.");
             return;
+        }
+
+        EquipItem equippedItem = equippedItems.get(equipmentSlot);
+        if(equippedItem != null){
+            float healthPostUnequip = Player.Instance.getStats().getCurrentHealth() -
+                    equippedItem.getStatIncreases().getMaxHealth();
+
+            if(healthPostUnequip <= 0) {
+                TextRenderer.printText(Color.getColor("red") + "You will die if you unequip that!"
+                        + Color.resetColor() + "\nHeal up if you wish to use it.");
+                return;
+            }
         }
 
         EquipItem unequippedItem = equippedItems.get(equipmentSlot);
