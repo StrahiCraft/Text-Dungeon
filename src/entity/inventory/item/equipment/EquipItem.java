@@ -81,7 +81,8 @@ public class EquipItem extends Item {
     @Override
     public String info() {
         return "Increases stats while equipped:\n" + statIncreases + "\n" +
-                "It can be equipped in the " + equipmentSlot + " slot.";
+                "It can be equipped in the " + Color.getColor("blue") + equipmentSlot + Color.resetColor()
+                + " slot.";
     }
 
     public void onEquip(){

@@ -115,7 +115,12 @@ public class PlayerShopping extends PlayerInInventory {
     }
 
     private void printShop(){
+        TextRenderer.skipLine();
+
+        TextRenderer.printText(Color.getColor("yellow") + "Gold: " +
+                Color.resetColor() + Player.Instance.getGold());
         TextRenderer.printText(Player.Instance.getCurrentRoom().toString());
+
         TextRenderer.skipLine();
     }
 }
