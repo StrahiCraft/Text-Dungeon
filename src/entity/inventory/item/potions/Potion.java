@@ -146,7 +146,7 @@ public class Potion extends Item {
                 statUpdate.append(" decreased by ");
             }
 
-            statUpdate.append(Math.abs(amount));
+            statUpdate.append(Math.abs(amount)).append('\n');
         }
 
         return statUpdate.toString();
