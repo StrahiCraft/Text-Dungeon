@@ -22,6 +22,12 @@ public class Equipment {
     }
 
     public void equip(EquipItem equipItem){
+        if(Player.Instance.getStats().getMaxSpeed() - equipItem.getStatIncreases().getMaxSpeed() <= 0) {
+            TextRenderer.printText(Color.getColor("red") + "You will be to heavy to fight with that equipped!"
+                    + Color.resetColor() + "\nGet faster if you wish to use it.");
+            return;
+        }
+
         Player.Instance.getInventory().removeItem(equipItem);
 
         if(equippedItems.get(equipItem.getEquipmentSlot()) != null) {
@@ -50,6 +56,9 @@ public class Equipment {
         EquipItem unequippedItem = equippedItems.get(equipmentSlot);
         unequippedItem.onUnequip();
         Player.Instance.getInventory().addItem(unequippedItem);
+
+        equippedItems.remove(equipmentSlot);
+        equippedItems.get(equipmentSlot);
     }
 
     public Equipment(Dictionary<EquipmentSlot, EquipItem> equippedItems) {

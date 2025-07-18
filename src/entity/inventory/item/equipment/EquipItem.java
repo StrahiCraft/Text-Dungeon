@@ -86,7 +86,6 @@ public class EquipItem extends Item {
     public void onUnequip(){
         TextRenderer.printText("Unequipped " + this);
         Player.Instance.decreaseStats(statIncreases);
-
     }
 
     @Override

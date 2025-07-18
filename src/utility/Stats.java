@@ -166,6 +166,12 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
             this.currentSpeed = 0;
             return;
         }
+
+        if(currentSpeed > maxSpeed){
+            this.currentSpeed = maxSpeed;
+            return;
+        }
+
         this.currentSpeed = currentSpeed;
     }
 
