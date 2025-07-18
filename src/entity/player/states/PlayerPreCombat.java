@@ -18,9 +18,7 @@ public class PlayerPreCombat extends PlayerState {
     @Override
     public boolean checkInput(String inputText, Scanner input) {
         if(inputText.equals("fight")){
-            //Player.Instance.setCurrentState(new PlayerInCombat());
-            Dungeon.setRoom(new EmptyRoom(Player.Instance.getCurrentRoom().getPosition()),
-                    Player.Instance.getCurrentRoom().getPosition());
+            Player.Instance.setCurrentState(new PlayerInCombat());
             return true;
         }
 

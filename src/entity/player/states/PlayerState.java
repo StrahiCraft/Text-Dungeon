@@ -10,15 +10,17 @@ import java.util.Scanner;
 
 public abstract class PlayerState {
     protected ArrayList<String> possibleCommands = new ArrayList<>();
+    private String inputQuestion;
 
     public PlayerState() {
         possibleCommands.add(Color.getColor("green") + "help" + Color.resetColor());
         possibleCommands.add("check");
         possibleCommands.add(Color.getColor("red") + "quit" + Color.resetColor());
+        inputQuestion = "What will you do?";
     }
 
     public void getInput(Scanner input) {
-        TextRenderer.printText("What will you do?");
+        TextRenderer.printText(inputQuestion);
         String inputText = input.nextLine();
 
         if(checkInput(inputText.toLowerCase(), input)){
@@ -63,5 +65,21 @@ public abstract class PlayerState {
         TextRenderer.printText("Seems like you need help, type " +
                 Color.getColor("green") + "help" + Color.resetColor() +
                 " to get some.");
+    }
+
+    public ArrayList<String> getPossibleCommands() {
+        return possibleCommands;
+    }
+
+    public void setPossibleCommands(ArrayList<String> possibleCommands) {
+        this.possibleCommands = possibleCommands;
+    }
+
+    public String getInputQuestion() {
+        return inputQuestion;
+    }
+
+    public void setInputQuestion(String inputQuestion) {
+        this.inputQuestion = inputQuestion;
     }
 }

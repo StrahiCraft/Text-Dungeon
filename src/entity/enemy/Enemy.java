@@ -1,5 +1,6 @@
 package entity.enemy;
 
+import combat.CombatManager;
 import entity.Entity;
 import graphics.Color;
 import utility.Stats;
@@ -15,7 +16,7 @@ public class Enemy extends Entity implements utility.file.FileWriter, FileInterp
 
     public Enemy(Enemy enemy){
         setName(enemy.getName());
-        setStats(enemy.getStats());
+        setStats(new Stats(enemy.getStats()));
 
         threatLevel = enemy.getThreatLevel();
     }
@@ -36,7 +37,7 @@ public class Enemy extends Entity implements utility.file.FileWriter, FileInterp
 
     @Override
     public void handleDeath() {
-
+        CombatManager.onEnemyDeath(this);
     }
 
     @Override

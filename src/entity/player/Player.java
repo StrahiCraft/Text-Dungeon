@@ -1,5 +1,6 @@
 package entity.player;
 
+import combat.CombatManager;
 import dungeon.Dungeon;
 import dungeon.rooms.DungeonRoom;
 import entity.Entity;
@@ -37,6 +38,7 @@ public class Player extends Entity {
 
     @Override
     public void handleDeath() {
+        CombatManager.setInCombat(false);
         TextRenderer.printText(Color.getColor("red") + "GAME OVER" + Color.resetColor());
         Game.setGameRunning(false);
     }

@@ -59,7 +59,7 @@ public class EnemyRoom extends DungeonRoom {
             }
 
             remainingThreat -= generatedEnemy.getThreatLevel();
-            enemies.add(generatedEnemy);
+            enemies.add(new Enemy(generatedEnemy));
 
             if(Math.random() < 0.25){
                 return;

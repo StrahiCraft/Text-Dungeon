@@ -2,8 +2,6 @@ package entity;
 
 import utility.Stats;
 
-import java.util.ArrayList;
-
 public abstract class Entity {
     private String name;
     private Stats stats;
@@ -19,9 +17,8 @@ public abstract class Entity {
     }
 
     public void takeDamage(float damage) {
-        stats.setCurrentHealth(stats.getCurrentHealth() - damage + damage > 0? damage *
-                ((stats.getArmor() < Stats.getMaxArmor()? stats.getArmor() : Stats.getMaxArmor())
-                        / Stats.getMaxArmor()) : 0);
+        stats.setCurrentHealth(stats.getCurrentHealth() - damage + (damage > 0? damage *
+                ((Math.min(stats.getArmor(), Stats.getMaxArmor())) / Stats.getMaxArmor()) : 0));
 
         if(stats.getCurrentHealth() <= 0) {
             handleDeath();
@@ -31,10 +28,6 @@ public abstract class Entity {
         if(stats.getCurrentHealth() > stats.getMaxHealth()) {
             stats.setCurrentHealth(stats.getMaxHealth());
         }
-    }
-
-    public void useSpeed(float amount){
-        getStats().setCurrentSpeed(getStats().getCurrentSpeed() - amount);
     }
 
     public void increaseStats(Stats increase) {

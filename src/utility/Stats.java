@@ -90,6 +90,17 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
         currentSpeed = maxSpeed;
     }
 
+    public void useSpeed(float multiplier) {
+        currentSpeed -= multiplier + (multiplier * ((Math.min(armor, Stats.getMaxArmor())) / Stats.getMaxArmor()));
+        if(currentSpeed < 0) {
+            currentSpeed = 0;
+        }
+    }
+
+    public void refillSpeed() {
+        currentSpeed = maxSpeed;
+    }
+
     public void multiplyStats(float multiplier){
         maxHealth *= multiplier;
         currentHealth *= multiplier;
