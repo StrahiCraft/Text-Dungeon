@@ -78,6 +78,12 @@ public class EquipItem extends Item {
         }
     }
 
+    @Override
+    public String info() {
+        return "Increases stats while equipped:\n" + statIncreases + "\n" +
+                "It can be equipped in the " + equipmentSlot + " slot.";
+    }
+
     public void onEquip(){
         TextRenderer.printText("Equipped " + this);
         Player.Instance.increaseStats(statIncreases);

@@ -1,7 +1,7 @@
 name=Chainmail boots
-price=7
+price=9
 equipmentSlot=FEET
-health=2.5500002
-armor=2.5500002
+health=3.0
+armor=3.0
 damage=0.0
-speed=1.7
+speed=2.0

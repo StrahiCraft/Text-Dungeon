@@ -26,7 +26,7 @@ public class DungeonGenerator {
     private static void generateEmptyDungeon(){
         Stack<DungeonRoom> roomsToPropagate = new Stack<>();
 
-        Dungeon.getDungeonRooms().put(new Vector2Int().toString(), new EmptyRoom(new Vector2Int(0, 0)));
+        Dungeon.getDungeonRooms().put(new Vector2Int().toString(), new LootRoom(new Vector2Int(0, 0)));
         roomsToPropagate.push(Dungeon.getDungeonRooms().get(new Vector2Int().toString()));
 
         while(Dungeon.getDungeonRooms().size() <= Dungeon.getDungeonStats().getMaxRooms() &&

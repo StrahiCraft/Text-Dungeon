@@ -22,7 +22,7 @@ public class Equipment {
     }
 
     public void equip(EquipItem equipItem){
-        if(Player.Instance.getStats().getMaxSpeed() - equipItem.getStatIncreases().getMaxSpeed() <= 0) {
+        if(Player.Instance.getStats().getMaxSpeed() + equipItem.getStatIncreases().getMaxSpeed() <= 0) {
             TextRenderer.printText(Color.getColor("red") + "You will be to heavy to fight with that equipped!"
                     + Color.resetColor() + "\nGet faster if you wish to use it.");
             return;

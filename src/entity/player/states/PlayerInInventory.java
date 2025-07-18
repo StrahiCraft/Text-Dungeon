@@ -14,6 +14,8 @@ public class PlayerInInventory extends PlayerState {
                 " the index of the item.");
         possibleCommands.add(Color.getColor("green") + "use" + Color.resetColor() +
                 " the index of the item.");
+        possibleCommands.add(Color.getColor("magenta") + "info" + Color.resetColor() +
+                " the index of the item.");
         possibleCommands.add(Color.getColor("red") + "close" + Color.resetColor());
 
         printInventory();
@@ -44,6 +46,11 @@ public class PlayerInInventory extends PlayerState {
                 printInventory();
                 return true;
             }
+            case "info" -> {
+                itemInfo(splitText);
+                printInventory();
+                return true;
+            }
         }
 
         return false;
@@ -57,7 +64,14 @@ public class PlayerInInventory extends PlayerState {
             return;
         }
 
-        Player.Instance.getInventory().useItem(Integer.parseInt(instructions[1]));
+        try {
+            Player.Instance.getInventory().useItem(Integer.parseInt(instructions[1]));
+        }
+        catch (NumberFormatException ignored) {
+            TextRenderer.printText("To use an item type in "
+                    + Color.getColor("green") + "use " + Color.resetColor() +
+                    "followed by the item index (number next to the item without the '.')");
+        }
     }
 
     private void dropItem(String[] instructions) {
@@ -68,7 +82,14 @@ public class PlayerInInventory extends PlayerState {
             return;
         }
 
-        Player.Instance.getInventory().removeItem(Integer.parseInt(instructions[1]));
+        try {
+            Player.Instance.getInventory().removeItem(Integer.parseInt(instructions[1]));
+        }
+        catch (NumberFormatException ignored) {
+            TextRenderer.printText("To drop an item type in "
+                    + Color.getColor("yellow") + "drop " + Color.resetColor() +
+                    "followed by the item index (number next to the item without the '.')");
+        }
     }
 
     private void unequipItem(String[] instructions) {
@@ -89,6 +110,25 @@ public class PlayerInInventory extends PlayerState {
                     + Color.getColor("gray") + "unequip " + Color.resetColor() +
                     "followed by the name of the slot\n(must be one of the following:" +
                     " HEAD, BODY, HANDS, LEGS, FEET or WEAPON)");
+        }
+    }
+
+    private void itemInfo(String[] instructions){
+        if(instructions.length != 2){
+            TextRenderer.printText("To get item info type in "
+                    + Color.getColor("magenta") + "info " + Color.resetColor() +
+                    "followed by the item index (number next to the item without the '.')");
+            return;
+        }
+
+        try {
+            TextRenderer.printText(Player.Instance.getInventory().
+                    getItem(Integer.parseInt(instructions[1])).info());
+        }
+        catch (NumberFormatException ignored){
+            TextRenderer.printText("To get item info type in "
+                    + Color.getColor("magenta") + "info " + Color.resetColor() +
+                    "followed by the item index (number next to the item without the '.')");
         }
     }
 

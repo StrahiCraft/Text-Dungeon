@@ -14,7 +14,7 @@ public class EnemyFactory {
                 new Stats(2f, 2f, 0f,
                 1f,
                 2, 2),
-                0.15f);
+                0.2f);
         slime.writeToFile();
 
         Enemy troll = new Enemy("Troll",

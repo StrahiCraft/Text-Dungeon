@@ -31,12 +31,7 @@ public abstract class Entity {
     }
 
     public void increaseStats(Stats increase) {
-        getStats().setMaxHealth(getStats().getMaxHealth() + increase.getMaxHealth());
-        getStats().setCurrentHealth(getStats().getCurrentHealth() + increase.getCurrentHealth());
-        getStats().setArmor(getStats().getArmor() + increase.getArmor());
-        getStats().setDamage(getStats().getDamage() + increase.getDamage());
-        getStats().setMaxSpeed(getStats().getMaxSpeed() + increase.getMaxSpeed());
-        getStats().setCurrentSpeed(getStats().getCurrentSpeed() + increase.getCurrentSpeed());
+        getStats().increaseStats(increase, 1);
     }
     public void decreaseStats(Stats decrease){
         getStats().setMaxHealth(getStats().getMaxHealth()         -decrease.getMaxHealth());

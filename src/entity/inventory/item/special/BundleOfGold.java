@@ -60,6 +60,11 @@ public class BundleOfGold extends Item {
     }
 
     @Override
+    public String info() {
+        return "Gives " + Color.getColor("yellow") + "gold " + Color.resetColor() + "when used.";
+    }
+
+    @Override
     public void writeToFile() {
         try {
             File file = new File("assets/items/special/" + getName() + ".txt");

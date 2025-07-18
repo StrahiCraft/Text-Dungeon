@@ -7,6 +7,7 @@ import entity.inventory.item.equipment.EquipItem;
 import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;
+import utility.Stats;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,8 @@ public class CombatManager {
     private static ArrayList<Enemy> enemies = new ArrayList<>();
     private static boolean inCombat = false;
     private static int goldReward;
+    private static Stats temporaryStatBonuses = new Stats();
+    private static boolean statsChanged = false;
 
     public static void resetCombat() {
         enemies.clear();
@@ -23,11 +26,12 @@ public class CombatManager {
 
     public static void endCombat() {
         inCombat = false;
-        Dungeon.setRoom(new EmptyRoom(Player.Instance.getCurrentRoom().getPosition()),
-                Player.Instance.getCurrentRoom().getPosition());
         TextRenderer.printText("You won the battle and got " + goldReward + Color.getColor("yellow") +
                 " gold " + Color.resetColor() + "for it.");
         Player.Instance.addGold(goldReward);
+        clearTemporaryStats();
+        Dungeon.setRoom(new EmptyRoom(Player.Instance.getCurrentRoom().getPosition()),
+                Player.Instance.getCurrentRoom().getPosition());
     }
 
     public static void onEnemyDeath(Enemy deadEnemy) {
@@ -58,7 +62,6 @@ public class CombatManager {
         }
 
         Enemy attackedEnemy = enemies.get(index - 1);
-
 
         float currenEnemyHealth = attackedEnemy.getStats().getCurrentHealth();
 
@@ -107,11 +110,28 @@ public class CombatManager {
         checkForTurnEnd();
     }
 
+    public static void addToTemporaryStats(Stats temporaryStats) {
+        temporaryStatBonuses.increaseStats(temporaryStats, 1);
+        statsChanged = true;
+    }
+
+    private static void clearTemporaryStats(){
+        if(statsChanged){
+            return;
+        }
+
+        Player.Instance.getStats().increaseStats(temporaryStatBonuses, -1);
+        temporaryStatBonuses = new Stats();
+        TextRenderer.printText("Temporary stats fade...");
+        statsChanged = false;
+    }
+
     private static void onTurnEnd(){
         Player.Instance.getStats().refillSpeed();
         for(Enemy enemy : enemies) {
             enemy.getStats().refillSpeed();
         }
+        clearTemporaryStats();
     }
 
     public static boolean playerTurn() {
@@ -143,7 +163,7 @@ public class CombatManager {
 
     public static void setEnemies(ArrayList<Enemy> enemies) {
         CombatManager.enemies = enemies;
-        goldReward = (int)(Dungeon.getDungeonStats().getCurrentThreat() * enemies.size());
+        goldReward = (int)(Dungeon.getDungeonStats().getCurrentThreat() * enemies.size() * 5f);
     }
 
     public static boolean isInCombat() {
@@ -160,6 +180,22 @@ public class CombatManager {
 
     public static void setGoldReward(int goldReward) {
         CombatManager.goldReward = goldReward;
+    }
+
+    public static Stats getTemporaryStatBonuses() {
+        return temporaryStatBonuses;
+    }
+
+    public static void setTemporaryStatBonuses(Stats temporaryStatBonuses) {
+        CombatManager.temporaryStatBonuses = temporaryStatBonuses;
+    }
+
+    public static boolean isStatsChanged() {
+        return statsChanged;
+    }
+
+    public static void setStatsChanged(boolean statsChanged) {
+        CombatManager.statsChanged = statsChanged;
     }
 
     public static String asString() {

@@ -7,7 +7,7 @@ import graphics.TextRenderer;
 
 public class ExitRoom extends EmptyRoom {
     public ExitRoom() {
-        setRoomSymbol('X');
+        setRoomSymbol('V');
 
     }
 
@@ -19,7 +19,7 @@ public class ExitRoom extends EmptyRoom {
     @Override
     public void onRoomEntered() {
         String onRoomEnterText = "You find yourself in a room with stairs leading deeper in to the dungeon." +
-                " Will you " + Color.getColor("green") + "descend" + Color.resetColor() + "?" + directionText();
+                " Will you " + Color.getColor("bright red") + "descend" + Color.resetColor() + "?" + directionText();
         TextRenderer.printText(onRoomEnterText);
     }
 }

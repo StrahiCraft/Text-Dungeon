@@ -1,7 +1,7 @@
 name=Chainmail leggings
-price=11
+price=13
 equipmentSlot=LEGS
-health=4.25
-armor=2.9750001
+health=5.0
+armor=3.5
 damage=0.0
-speed=-0.425
+speed=-0.5

@@ -1,9 +1,7 @@
 package entity.inventory.item.potions;
 
 import combat.CombatManager;
-import entity.inventory.item.Item;
 import entity.inventory.item.Rarity;
-import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;
 import utility.Stats;
@@ -36,7 +34,12 @@ public class TemporaryPotion extends Potion {
             return;
         }
         super.onUse();
-        // TODO remove stat increase after one combat turn
+        CombatManager.addToTemporaryStats(getStatIncreases());
+    }
+
+    @Override
+    public String info() {
+        return "Increases stats until the end of the combat turn: " + getStatIncreases();
     }
 
     @Override

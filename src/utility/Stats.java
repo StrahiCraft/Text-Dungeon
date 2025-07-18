@@ -110,6 +110,15 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
         currentSpeed *= multiplier;
     }
 
+    public void increaseStats(Stats otherStats, float multiplier){
+        maxHealth += otherStats.getMaxHealth() * multiplier;
+        currentHealth += otherStats.getCurrentHealth() * multiplier;
+        armor += otherStats.getArmor() * multiplier;
+        damage += otherStats.getDamage() * multiplier;
+        maxSpeed += otherStats.getMaxSpeed() * multiplier;
+        currentSpeed += otherStats.getCurrentSpeed() * multiplier;
+    }
+
     public static float getMaxArmor() {
         return MAX_ARMOR;
     }
@@ -127,9 +136,10 @@ public class Stats implements utility.file.FileWriter, FileInterpreter {
     }
 
     public void setCurrentHealth(float currentHealth) {
-        this.currentHealth = currentHealth;
-        if(currentHealth > maxHealth) {
-            this.currentHealth = maxHealth;
+        this.currentHealth = Math.min(currentHealth, maxHealth);
+
+        if(this.currentHealth < 0){
+            this.currentHealth = 0;
         }
     }
 

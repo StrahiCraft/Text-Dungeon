@@ -1,5 +1,5 @@
 name=Slime
-threatLevel=0.15
+threatLevel=0.2
 health=2.0
 armor=0.0
 damage=1.0

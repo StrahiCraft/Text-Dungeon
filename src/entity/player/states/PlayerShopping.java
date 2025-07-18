@@ -19,10 +19,14 @@ public class PlayerShopping extends PlayerInInventory {
 
     @Override
     public boolean checkInput(String inputText, Scanner input) {
-        super.checkInput(inputText, input);
         String[] splitText = inputText.split(" ");
 
         switch (splitText[0]){
+            case "close" -> {
+                Player.Instance.setCurrentState(Player.Instance.getPreviousState());
+                TextRenderer.printText("Shop " + Color.getColor("red") + "closed" + Color.resetColor());
+                return true;
+            }
             case "sell" -> {
                 sellItem(splitText);
                 printInventory();
@@ -37,7 +41,7 @@ public class PlayerShopping extends PlayerInInventory {
             }
         }
 
-        return false;
+        return super.checkInput(inputText, input);
     }
 
     private void sellItem(String[] instructions) {

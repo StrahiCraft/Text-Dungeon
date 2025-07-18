@@ -1,7 +1,7 @@
 name=Greatsword
-price=21
+price=25
 equipmentSlot=WEAPON
-health=12.75
-armor=8.5
-damage=12.75
-speed=-8.5
+health=15.0
+armor=10.0
+damage=15.0
+speed=-10.0

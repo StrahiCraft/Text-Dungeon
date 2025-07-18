@@ -4,6 +4,7 @@ import entity.inventory.item.Item;
 import entity.inventory.item.Rarity;
 import entity.player.Player;
 import graphics.Color;
+import graphics.TextRenderer;
 import utility.Stats;
 
 import java.io.File;
@@ -17,25 +18,30 @@ public class Potion extends Item {
     public Potion(){
         super();
         statIncreases = new Stats();
+        handleRarity();
     }
 
     public Potion(Stats statIncreases) {
         super();
         this.statIncreases = statIncreases;
+        handleRarity();
     }
 
     public Potion(Potion otherItem) {
         super(otherItem);
         statIncreases = otherItem.getStatIncreases();
+        handleRarity();
     }
 
     public Potion(String name, Rarity rarity, int price, Stats statIncreases) {
         super(name, rarity, price);
         this.statIncreases = statIncreases;
+        handleRarity();
     }
 
     @Override
     public void onUse() {
+        printOnUseText();
         Player.Instance.increaseStats(statIncreases);
         Player.Instance.getInventory().removeItem(this);
     }
@@ -46,25 +52,30 @@ public class Potion extends Item {
             case COMMON -> statIncreases.multiplyStats(1f);
             case UNCOMMON -> {
                 statIncreases.multiplyStats(1.1f);
-                setPrice((int)((float)getPrice() * 1.5f));
+                setPrice((int)(getPrice() * 1.5f));
             }
             case RARE -> {
                 statIncreases.multiplyStats(1.25f);
-                setPrice((int)((float)getPrice() * 2f));
+                setPrice((int)(getPrice() * 2f));
             }
             case EPIC -> {
                 statIncreases.multiplyStats(1.5f);
-                setPrice((int)((float)getPrice() * 3f));
+                setPrice((int)(getPrice() * 3f));
             }
             case LEGENDARY -> {
                 statIncreases.multiplyStats(2f);
-                setPrice((int)((float)getPrice() * 5f));
+                setPrice((int)(getPrice() * 5f));
             }
             case MITHIC -> {
                 statIncreases.multiplyStats(3f);
-                setPrice((int)((float)getPrice() * 10f));
+                setPrice((int)(getPrice() * 10f));
             }
         }
+    }
+
+    @Override
+    public String info() {
+        return "Increases stats permanently: " + statIncreases;
     }
 
     @Override
@@ -105,5 +116,39 @@ public class Potion extends Item {
 
     public void setStatIncreases(Stats statIncreases) {
         this.statIncreases = statIncreases;
+    }
+
+    private void printOnUseText() {
+        String statUpdates = getStatUpdate(Color.getColor("bright red") + "Max health"
+                + Color.resetColor(), statIncreases.getMaxHealth()) +
+                getStatUpdate(Color.getColor("red") + "Health"
+                        + Color.resetColor(), statIncreases.getCurrentHealth()) +
+                getStatUpdate(Color.getColor("yellow") + "Armor"
+                        + Color.resetColor(), statIncreases.getArmor()) +
+                getStatUpdate(Color.getColor("magenta") + "Damage"
+                        + Color.resetColor(), statIncreases.getDamage()) +
+                getStatUpdate("Max speed", statIncreases.getMaxSpeed()) +
+                getStatUpdate("Speed", statIncreases.getCurrentSpeed());
+
+        System.out.println(statUpdates);
+    }
+
+    private String getStatUpdate(String statName, float amount){
+        StringBuilder statUpdate = new StringBuilder();
+
+        if(amount != 0){
+            statUpdate.append(statName);
+
+            if(amount > 0){
+                statUpdate.append(" increased by ");
+            }
+            else {
+                statUpdate.append(" decreased by ");
+            }
+
+            statUpdate.append(Math.abs(amount));
+        }
+
+        return statUpdate.toString();
     }
 }

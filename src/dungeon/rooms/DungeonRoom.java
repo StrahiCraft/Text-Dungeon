@@ -8,7 +8,7 @@ public abstract class DungeonRoom {
 
     private char roomSymbol = '#';
 
-    private boolean explored = true;
+    private boolean explored = false;
 
     private DungeonRoom northRoom;
     private DungeonRoom eastRoom;

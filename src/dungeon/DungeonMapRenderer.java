@@ -37,8 +37,8 @@ public class DungeonMapRenderer {
         if(roomType == '$'){
             return Color.getColor("magenta");
         }
-        if(roomType == 'X'){
-            return Color.getColor("green");
+        if(roomType == 'V'){
+            return Color.getColor("bright red");
         }
         return Color.resetColor();
     }

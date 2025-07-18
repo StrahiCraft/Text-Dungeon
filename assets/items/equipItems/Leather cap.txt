@@ -1,7 +1,7 @@
 name=Leather cap
-price=2
+price=3
 equipmentSlot=HEAD
 health=0.0
-armor=0.85
+armor=1.0
 damage=0.0
-speed=0.85
+speed=1.0
