@@ -25,7 +25,7 @@ public class EquipItem extends Item {
 
     public EquipItem(EquipItem otherItem){
         super(otherItem);
-        statIncreases = otherItem.getStatIncreases();
+        statIncreases = new Stats(otherItem.getStatIncreases());
         equipmentSlot = otherItem.getEquipmentSlot();
         handleRarity();
     }

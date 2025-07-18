@@ -29,7 +29,7 @@ public class Potion extends Item {
 
     public Potion(Potion otherItem) {
         super(otherItem);
-        statIncreases = otherItem.getStatIncreases();
+        statIncreases = new Stats(otherItem.getStatIncreases());
         handleRarity();
     }
 

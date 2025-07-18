@@ -139,11 +139,6 @@ public class ItemFactory {
                 new Stats(0, 15, 0, 0, 0, 0));
         healthPotion.writeToFile();
 
-        Potion speedPotion = new Potion("Speed potion",
-                Rarity.COMMON, 15,
-                new Stats(0, 0, 0, 0, 0, 5));
-        speedPotion.writeToFile();
-
         Potion scalePotion = new Potion(Color.getColor("yellow") + "Scale potion" + Color.resetColor(),
                 Rarity.COMMON, 25,
                 new Stats(0, 0, 2, 0, 0, 0));
