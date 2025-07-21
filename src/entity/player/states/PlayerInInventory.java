@@ -130,6 +130,7 @@ public class PlayerInInventory extends PlayerState {
                     + Color.getColor("magenta") + "info " + Color.resetColor() +
                     "followed by the item index (number next to the item without the '.')");
         }
+        catch (NullPointerException ignored){}
     }
 
     protected void printInventory() {

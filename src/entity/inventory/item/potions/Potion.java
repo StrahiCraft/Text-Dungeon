@@ -4,7 +4,6 @@ import entity.inventory.item.Item;
 import entity.inventory.item.Rarity;
 import entity.player.Player;
 import graphics.Color;
-import graphics.TextRenderer;
 import utility.Stats;
 
 import java.io.File;
