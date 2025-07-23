@@ -24,6 +24,7 @@ public class PlayerInExitRoom extends PlayerWandering{
         }
 
         Dungeon.getDungeonStats().progressFloor();
+        Player.Instance.increaseScore(10);
         return true;
     }
 }

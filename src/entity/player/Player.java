@@ -11,10 +11,14 @@ import game.Game;
 import graphics.Color;
 import graphics.TextRenderer;
 import utility.Stats;
+import utility.file.FileInterpreter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
-public class Player extends Entity {
+public class Player extends Entity implements utility.file.FileWriter, FileInterpreter {
     public static Player Instance;
 
     private DungeonRoom currentRoom;
@@ -26,6 +30,8 @@ public class Player extends Entity {
     private Equipment equipment;
 
     private int gold = 0;
+
+    private int currentScore = 0;
 
     public Player() {
         super();
@@ -48,7 +54,7 @@ public class Player extends Entity {
     @Override
     public void handleDeath() {
         CombatManager.setInCombat(false);
-        TextRenderer.printText(Color.getColor("red") + "GAME OVER" + Color.resetColor());
+        TextRenderer.printText(Color.getColor("red") + "GAME OVER" + Color.resetColor() + "\nYour score was: " + currentScore);
         Game.setGameRunning(false);
     }
 
@@ -73,12 +79,50 @@ public class Player extends Entity {
         currentRoom.onRoomEntered();
     }
 
-    public void addGold(int amount){
+    public void addGold(int amount) {
         gold += amount;
 
-        if(gold < 0){
+        if(gold < 0) {
             gold = 0;
         }
+    }
+
+    public void increaseScore(int amount) {
+        currentScore += amount;
+    }
+
+    @Override
+    public void writeToFile() {
+        try {
+            File file = new File("assets/champion.txt");
+            file.createNewFile();
+
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write("name=" + getName() + "\nhighScore=" + currentScore + "\n");
+
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(Color.getColor("bright red") + "Error while creating or writing to utility.file: "
+                    + Color.resetColor() + "assets/enemies" + getName() + ".txt");
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void interpretFileData(ArrayList<String> fileData) {
+        setName(fileData.get(0));
+        try{
+            currentScore = Integer.parseInt(fileData.get(1));
+        }
+        catch(NumberFormatException e){
+            System.out.println("Error: " + Color.getColor("red") + "Error when reading champion score." + Color.resetColor());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void writeToFile(FileWriter fileWriter) {
+        writeToFile();
     }
 
     public DungeonRoom getPreviousRoom() {
@@ -128,5 +172,13 @@ public class Player extends Entity {
 
     public void setGold(int gold) {
         this.gold = gold;
+    }
+
+    public int getCurrentScore() {
+        return currentScore;
+    }
+
+    public void setCurrentScore(int currentScore) {
+        this.currentScore = currentScore;
     }
 }

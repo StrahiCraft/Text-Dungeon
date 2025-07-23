@@ -45,6 +45,7 @@ public class Equipment {
 
         equippedItems.put(equipItem.getEquipmentSlot(), equipItem);
         equipItem.onEquip();
+        Player.Instance.getStats().refillSpeed();
     }
 
     public void unequip(EquipmentSlot equipmentSlot) {

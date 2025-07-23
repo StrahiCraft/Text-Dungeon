@@ -29,6 +29,7 @@ public class CombatManager {
         TextRenderer.printText("You won the battle and got " + goldReward + Color.getColor("yellow") +
                 " gold " + Color.resetColor() + "for it.");
         Player.Instance.addGold(goldReward);
+        Player.Instance.getStats().refillSpeed();
         clearTemporaryStats();
         Dungeon.setRoom(new EmptyRoom(Player.Instance.getCurrentRoom().getPosition()),
                 Player.Instance.getCurrentRoom().getPosition());
@@ -36,6 +37,7 @@ public class CombatManager {
 
     public static void onEnemyDeath(Enemy deadEnemy) {
         enemies.remove(deadEnemy);
+        Player.Instance.increaseScore((int)(10 * deadEnemy.getThreatLevel()));
         if(enemies.isEmpty()){
             CombatManager.endCombat();
         }

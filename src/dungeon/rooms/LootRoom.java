@@ -2,6 +2,7 @@ package dungeon.rooms;
 
 import entity.inventory.item.Item;
 import entity.inventory.item.ItemGenerator;
+import entity.player.Player;
 import entity.player.states.PlayerInLootRoom;
 import entity.player.states.PlayerState;
 import graphics.Color;
@@ -38,6 +39,7 @@ public class LootRoom extends EmptyRoom {
     public void onRoomEntered() {
         TextRenderer.printText("You find yourself in a room with a chest! There could be" +
                 Color.getColor("bright blue") + " loot" + Color.resetColor() + " inside." + directionText());
+        Player.Instance.increaseScore(2);
     }
 
     public Item getLoot() {

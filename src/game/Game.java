@@ -13,11 +13,13 @@ import java.util.Scanner;
 
 public class Game {
     private static boolean gameRunning = true;
+    private static Player champion = new Player();
 
     public static void startGame(){
         Scanner input = new Scanner(System.in);
         EnemyGenerator.generateEnemiesFromFiles();
         ItemGenerator.generateItemsFromFiles();
+        updateChampion();
 
         mainMenu(input);
         input.close();
@@ -25,8 +27,6 @@ public class Game {
 
     public static void mainMenu(Scanner input) {
         boolean enteredGame = false;
-
-
 
         while (!enteredGame) {
             renderMainMenu();
@@ -41,14 +41,24 @@ public class Game {
                 gameLoop(input);
             }
         }
+    }
 
+    public static void updateChampion() {
+        champion.interpretFileData(FileReader.readFile("assets/champion.txt"));
     }
 
     private static void renderMainMenu() {
         TextRenderer.skipLine();
 
-        TextRenderer.printText("Welcome to the " + Color.getColor("green") + "TEXT DUNGEON" + Color.resetColor() + "!"
-        + "\nType in " + Color.getColor("green") + "start" + Color.resetColor() + " to start the game." +
+        TextRenderer.printText("Welcome to the " + Color.getColor("green") + "TEXT DUNGEON" + Color.resetColor() + "!");
+
+        if(champion.getCurrentScore() > 0){
+            TextRenderer.skipLine();
+            TextRenderer.printText("The current champion is " + Color.getColor("red") + champion.getName() + Color.resetColor() +
+                    " with a" + Color.getColor("green") + " score " + Color.resetColor() + "of " + champion.getCurrentScore() + ".");
+        }
+
+        TextRenderer.printText("\nType in " + Color.getColor("green") + "start" + Color.resetColor() + " to start the game." +
                 "\nType in " + Color.getColor("red") + "quit" + Color.resetColor() + " to quit game");
     }
 
@@ -78,5 +88,17 @@ public class Game {
 
     public static void setGameRunning(boolean gameRunning) {
         Game.gameRunning = gameRunning;
+    }
+
+    public static boolean isGameRunning() {
+        return gameRunning;
+    }
+
+    public static Player getChampion() {
+        return champion;
+    }
+
+    public static void setChampion(Player champion) {
+        Game.champion = champion;
     }
 }

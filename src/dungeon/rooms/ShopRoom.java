@@ -42,6 +42,7 @@ public class ShopRoom extends EmptyRoom {
     public void onRoomEntered() {
         TextRenderer.printText("You find yourself in a room with a " + Color.getColor("magenta") +
                 "shop" + Color.resetColor() + "." + directionText());
+        Player.Instance.increaseScore(2);
     }
 
     private void generateWares(){
