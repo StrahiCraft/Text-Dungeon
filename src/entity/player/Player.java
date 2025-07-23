@@ -27,6 +27,15 @@ public class Player extends Entity {
 
     private int gold = 0;
 
+    public Player() {
+        super();
+        Instance = this;
+        currentRoom = Dungeon.getStartingRoom();
+        inventory = new Inventory(10);
+
+        equipment = new Equipment();
+    }
+
     public Player(String name, Stats stats) {
         super(name, stats);
         Instance = this;
