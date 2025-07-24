@@ -85,6 +85,11 @@ public class EquipItem extends Item {
                 + " slot.";
     }
 
+    @Override
+    public Item copy() {
+        return new EquipItem();
+    }
+
     public void onEquip(){
         TextRenderer.printText("Equipped " + this);
         Player.Instance.increaseStats(statIncreases);

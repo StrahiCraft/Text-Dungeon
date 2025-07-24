@@ -34,67 +34,22 @@ public class ItemGenerator {
     }
 
     public static void generateItemsFromFiles(){
-        generateEquipItems();
-        generatePotions();
-        generateTemporaryPotions();
-        generateBundlesOfGold();
+        generateItems(new EquipItem(), "assets/items/equipItems");
+        generateItems(new Potion(), "assets/items/potions/permanent");
+        generateItems(new TemporaryPotion(), "assets/items/potions/temporary");
+        generateItems(new BundleOfGold(), "assets/items/special/bundlesOfGold");
     }
 
-    private static void generateEquipItems(){
-        File itemTypeFolder =  new File("assets/items/equipItems");
+    private static void generateItems(Item itemType, String filePath){
+        File itemTypeFolder =  new File(filePath);
 
         for(File currentItemFile : itemTypeFolder.listFiles()) {
-            items.add(getEquipItemFromFile(currentItemFile));
+            items.add(getItemFromFile(currentItemFile, itemType));
         }
     }
 
-    private static EquipItem getEquipItemFromFile(File itemFile){
-        EquipItem newItem = new EquipItem();
-        newItem.interpretFileData(FileReader.readFile(itemFile));
-
-        return newItem;
-    }
-
-    private static void generatePotions(){
-        File itemTypeFolder =  new File("assets/items/potions/permanent");
-
-        for(File currentItemFile : itemTypeFolder.listFiles()) {
-            items.add(getPotionFromFile(currentItemFile));
-        }
-    }
-
-    private static Potion getPotionFromFile(File itemFile){
-        Potion newItem = new Potion();
-        newItem.interpretFileData(FileReader.readFile(itemFile));
-
-        return newItem;
-    }
-
-    private static void generateTemporaryPotions(){
-        File itemTypeFolder =  new File("assets/items/potions/temporary");
-
-        for(File currentItemFile : itemTypeFolder.listFiles()) {
-            items.add(getTemporaryPotionFromFile(currentItemFile));
-        }
-    }
-
-    private static TemporaryPotion getTemporaryPotionFromFile(File itemFile){
-        TemporaryPotion newItem = new TemporaryPotion();
-        newItem.interpretFileData(FileReader.readFile(itemFile));
-
-        return newItem;
-    }
-
-    private static void generateBundlesOfGold(){
-        File itemTypeFolder =  new File("assets/items/special");
-
-        for(File currentItemFile : itemTypeFolder.listFiles()) {
-            items.add(getBundleOfGoldFromFile(currentItemFile));
-        }
-    }
-
-    private static BundleOfGold getBundleOfGoldFromFile(File itemFile){
-        BundleOfGold newItem = new BundleOfGold();
+    private static Item getItemFromFile(File itemFile, Item  itemType){
+        Item newItem = itemType.copy();
         newItem.interpretFileData(FileReader.readFile(itemFile));
 
         return newItem;

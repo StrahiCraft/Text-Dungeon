@@ -63,9 +63,14 @@ public class BundleOfGold extends Item {
     }
 
     @Override
+    public Item copy() {
+        return new BundleOfGold();
+    }
+
+    @Override
     public void writeToFile() {
         try {
-            File file = new File("assets/items/special/" + getName() + ".txt");
+            File file = new File("assets/items/special/bundlesOfGold/" + getName() + ".txt");
             file.createNewFile();
 
             FileWriter fileWriter = new FileWriter(file);
@@ -76,7 +81,7 @@ public class BundleOfGold extends Item {
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(Color.getColor("bright red") + "Error while creating or writing to utility.file: "
-                    + Color.resetColor() + "assets/items/specials/" + getName() + ".txt");
+                    + Color.resetColor() + "assets/items/specials/bundlesOfGold/" + getName() + ".txt");
             e.printStackTrace();
         }
     }

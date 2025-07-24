@@ -78,6 +78,11 @@ public class Potion extends Item {
     }
 
     @Override
+    public Item copy() {
+        return new Potion();
+    }
+
+    @Override
     public void interpretFileData(ArrayList<String> fileData) {
         setName(fileData.get(0));
         setPrice(Integer.parseInt(fileData.get(1)));

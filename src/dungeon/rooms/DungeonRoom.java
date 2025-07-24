@@ -25,6 +25,7 @@ public abstract class DungeonRoom {
 
     public abstract PlayerState getRoomState();
     public abstract void onRoomEntered();
+    public abstract DungeonRoom copy();
 
     public void setNeighbouringRoom(DungeonRoom room, Vector2Int direction) {
         if(direction == null) {
@@ -97,8 +98,6 @@ public abstract class DungeonRoom {
         }
         return connectionCount;
     }
-
-    public abstract DungeonRoom copy();
 
     public Vector2Int getPosition() {
         return position;

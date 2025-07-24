@@ -1,6 +1,7 @@
 package inventory.item.potions;
 
 import combat.CombatManager;
+import inventory.item.Item;
 import inventory.item.Rarity;
 import graphics.Color;
 import graphics.TextRenderer;
@@ -59,6 +60,11 @@ public class TemporaryPotion extends Potion {
                     + Color.resetColor() + "assets/items/equipItems/" + getName() + ".txt");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Item copy() {
+        return new TemporaryPotion();
     }
 
     @Override
