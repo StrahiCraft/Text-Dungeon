@@ -12,6 +12,11 @@ public class ExitRoom extends EmptyRoom {
     }
 
     @Override
+    public DungeonRoom copy() {
+        return new ExitRoom();
+    }
+
+    @Override
     public PlayerState getRoomState() {
         return new PlayerInExitRoom();
     }

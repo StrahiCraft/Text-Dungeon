@@ -15,7 +15,7 @@ public abstract class DungeonRoom {
     private DungeonRoom southRoom;
     private DungeonRoom westRoom;
 
-    public DungeonRoom(){
+    public DungeonRoom() {
 
     }
 
@@ -97,6 +97,8 @@ public abstract class DungeonRoom {
         }
         return connectionCount;
     }
+
+    public abstract DungeonRoom copy();
 
     public Vector2Int getPosition() {
         return position;

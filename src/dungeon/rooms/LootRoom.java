@@ -31,6 +31,11 @@ public class LootRoom extends EmptyRoom {
     }
 
     @Override
+    public DungeonRoom copy() {
+        return new LootRoom();
+    }
+
+    @Override
     public PlayerState getRoomState() {
         return new PlayerInLootRoom();
     }

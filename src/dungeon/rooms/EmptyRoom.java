@@ -28,6 +28,11 @@ public class EmptyRoom extends DungeonRoom {
         Player.Instance.increaseScore(1);
     }
 
+    @Override
+    public DungeonRoom copy() {
+        return new EmptyRoom();
+    }
+
     protected String directionText(){
         StringBuilder actions = new StringBuilder();
 

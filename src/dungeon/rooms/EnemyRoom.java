@@ -46,6 +46,11 @@ public class EnemyRoom extends DungeonRoom {
                 + "or " + Color.getColor("bright blue") + " flee " + Color.resetColor() + ".");
     }
 
+    @Override
+    public DungeonRoom copy() {
+        return new EnemyRoom();
+    }
+
     private void generateEnemies() {
         enemies = new ArrayList<Enemy>();
 

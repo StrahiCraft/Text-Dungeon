@@ -45,6 +45,11 @@ public class ShopRoom extends EmptyRoom {
         Player.Instance.increaseScore(2);
     }
 
+    @Override
+    public DungeonRoom copy() {
+        return new ShopRoom();
+    }
+
     private void generateWares(){
         itemsForSale = new ArrayList<>(0);
         for(int i = 0; i < 6; i++){

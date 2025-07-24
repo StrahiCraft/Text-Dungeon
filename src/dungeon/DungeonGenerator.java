@@ -16,9 +16,9 @@ public class DungeonGenerator {
         generateEmptyDungeon();
         Player.Instance.setCurrentRoom(Dungeon.getStartingRoom());
 
-        generateEnemyRooms();
-        generateLootRooms();
-        generateShops();
+        generateSpecialRooms(new EnemyRoom(), Dungeon.getDungeonStats().getEnemyRoomChance());
+        generateSpecialRooms(new LootRoom(), Dungeon.getDungeonStats().getLootRoomChance());
+        generateSpecialRooms(new ShopRoom(), Dungeon.getDungeonStats().getShopChance());
 
         generateExit();
     }
@@ -81,27 +81,11 @@ public class DungeonGenerator {
         return new EmptyRoom(currentRoom.getPosition().add(direction));
     }
 
-    private static void generateEnemyRooms(){
-        int roomsToGenerate = (int)(Dungeon.getDungeonRooms().size() * Dungeon.getDungeonStats().getEnemyRoomChance());
+    private static void generateSpecialRooms(DungeonRoom roomType, float chance) {
+        int roomsToGenerate = (int)(Dungeon.getDungeonRooms().size() * chance);
 
         for(int i = 0; i < roomsToGenerate; i++) {
-            Dungeon.setRoom(new EnemyRoom(), Dungeon.getRandomRoom().getPosition());
-        }
-    }
-
-    private static void generateLootRooms(){
-        int roomsToGenerate = (int)(Dungeon.getDungeonRooms().size() * Dungeon.getDungeonStats().getLootRoomChance());
-
-        for(int i = 0; i < roomsToGenerate; i++) {
-            Dungeon.setRoom(new LootRoom(), Dungeon.getRandomRoom().getPosition());
-        }
-    }
-
-    private static void generateShops(){
-        int roomsToGenerate = (int)(Dungeon.getDungeonRooms().size() * Dungeon.getDungeonStats().getShopChance());
-
-        for(int i = 0; i < roomsToGenerate; i++) {
-            Dungeon.setRoom(new ShopRoom(), Dungeon.getRandomRoom().getPosition());
+            Dungeon.setRoom(roomType.copy(), Dungeon.getRandomRoom().getPosition());
         }
     }
 
