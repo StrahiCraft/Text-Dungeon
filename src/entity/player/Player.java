@@ -66,19 +66,6 @@ public class Player extends Entity implements utility.file.FileWriter, FileInter
         currentState.getInput(input);
     }
 
-    public DungeonRoom getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(DungeonRoom currentRoom) {
-        previousRoom = this.currentRoom;
-        this.currentRoom = currentRoom;
-        currentState = currentRoom.getRoomState();
-        currentRoom.setExplored(true);
-
-        currentRoom.onRoomEntered();
-    }
-
     public void addGold(int amount) {
         gold += amount;
 
@@ -126,6 +113,19 @@ public class Player extends Entity implements utility.file.FileWriter, FileInter
     @Override
     public void writeToFile(FileWriter fileWriter) {
         writeToFile();
+    }
+
+    public DungeonRoom getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(DungeonRoom currentRoom) {
+        previousRoom = this.currentRoom;
+        this.currentRoom = currentRoom;
+        currentState = currentRoom.getRoomState();
+        currentRoom.setExplored(true);
+
+        currentRoom.onRoomEntered();
     }
 
     public DungeonRoom getPreviousRoom() {
