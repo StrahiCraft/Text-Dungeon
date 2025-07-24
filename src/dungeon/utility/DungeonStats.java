@@ -1,5 +1,6 @@
-package dungeon;
+package dungeon.utility;
 
+import dungeon.DungeonGenerator;
 import utility.file.FileInterpreter;
 import utility.file.FileReader;
 

@@ -2,6 +2,7 @@ package dungeon;
 
 import dungeon.rooms.DungeonRoom;
 import dungeon.utility.DungeonBounds;
+import dungeon.utility.DungeonStats;
 import entity.player.Player;
 import utility.Vector2Int;
 
