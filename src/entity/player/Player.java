@@ -110,13 +110,16 @@ public class Player extends Entity implements utility.file.FileWriter, FileInter
 
     @Override
     public void interpretFileData(ArrayList<String> fileData) {
+        if(fileData.size() != 2 || fileData == null){
+            writeToFile();
+        }
+
         setName(fileData.get(0));
         try{
             currentScore = Integer.parseInt(fileData.get(1));
         }
         catch(NumberFormatException e){
             System.out.println("Error: " + Color.getColor("red") + "Error when reading champion score." + Color.resetColor());
-            e.printStackTrace();
         }
     }
 
