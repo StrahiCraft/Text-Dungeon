@@ -14,13 +14,12 @@ import java.util.Scanner;
 
 public class Game {
     private static boolean gameRunning = true;
-    private static Player champion = new Player();
+    private static Player champion;
 
     public static void startGame(){
         Scanner input = new Scanner(System.in);
         EnemyGenerator.generateEnemiesFromFiles();
         ItemGenerator.generateItemsFromFiles();
-        updateChampion();
 
         mainMenu(input);
         input.close();
@@ -46,10 +45,12 @@ public class Game {
     }
 
     public static void updateChampion() {
+        champion = new Player();
         champion.interpretFileData(FileReader.readFile("assets/champion.txt"));
     }
 
     private static void renderMainMenu() {
+        updateChampion();
         TextRenderer.skipLine();
 
         TextRenderer.printText("Welcome to the " + Color.getColor("green") + "TEXT DUNGEON" + Color.resetColor() + "!");
