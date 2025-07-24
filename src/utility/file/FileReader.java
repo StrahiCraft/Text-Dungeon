@@ -34,7 +34,7 @@ public class FileReader {
     }
 
     private static String unFormatString(String formatedString){
-        String[] unformatedStringArray = formatedString.split("=");
-        return unformatedStringArray[unformatedStringArray.length - 1];
+        String[] unformattedStringArray = formatedString.split("=");
+        return unformattedStringArray[unformattedStringArray.length - 1];
     }
 }
