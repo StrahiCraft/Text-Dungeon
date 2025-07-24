@@ -1,5 +1,6 @@
 package game;
 
+import dungeon.Dungeon;
 import dungeon.DungeonGenerator;
 import entity.enemy.EnemyGenerator;
 import entity.inventory.item.ItemGenerator;
@@ -76,6 +77,7 @@ public class Game {
         TextRenderer.printText("Entering " + Color.getColor("red") + "DUNGEON" +  Color.resetColor() + "...");
         TextRenderer.skipLine();
 
+        Dungeon.resetDungeon();
         DungeonGenerator.generateDungeon();
 
         while(gameRunning){
