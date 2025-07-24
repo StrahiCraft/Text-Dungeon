@@ -38,6 +38,7 @@ public class Game {
             }
 
             if(command.equalsIgnoreCase("start")) {
+                gameRunning = true;
                 gameLoop(input);
             }
         }
