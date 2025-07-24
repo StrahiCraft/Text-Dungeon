@@ -3,7 +3,7 @@ package combat;
 import dungeon.Dungeon;
 import dungeon.rooms.EmptyRoom;
 import entity.enemy.Enemy;
-import entity.inventory.item.equipment.EquipItem;
+import inventory.item.equipment.EquipItem;
 import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;

@@ -1,9 +1,9 @@
-package entity.inventory.item;
+package inventory.item;
 
-import entity.inventory.item.equipment.EquipItem;
-import entity.inventory.item.potions.Potion;
-import entity.inventory.item.potions.TemporaryPotion;
-import entity.inventory.item.special.BundleOfGold;
+import inventory.item.equipment.EquipItem;
+import inventory.item.potions.Potion;
+import inventory.item.potions.TemporaryPotion;
+import inventory.item.special.BundleOfGold;
 import utility.file.FileReader;
 
 import java.io.File;

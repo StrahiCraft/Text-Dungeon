@@ -1,7 +1,7 @@
-package entity.inventory.item.equipment;
+package inventory.item.equipment;
 
-import entity.inventory.item.Item;
-import entity.inventory.item.Rarity;
+import inventory.item.Item;
+import inventory.item.Rarity;
 import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;

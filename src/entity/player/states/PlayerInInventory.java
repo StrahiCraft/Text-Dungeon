@@ -1,6 +1,6 @@
 package entity.player.states;
 
-import entity.inventory.item.equipment.EquipmentSlot;
+import inventory.item.equipment.EquipmentSlot;
 import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;

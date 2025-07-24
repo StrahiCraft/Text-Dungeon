@@ -1,7 +1,7 @@
 package entity.player.states;
 
 import dungeon.rooms.ShopRoom;
-import entity.inventory.item.Item;
+import inventory.item.Item;
 import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;

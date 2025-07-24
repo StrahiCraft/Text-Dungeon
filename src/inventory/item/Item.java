@@ -1,4 +1,4 @@
-package entity.inventory.item;
+package inventory.item;
 
 import graphics.Color;
 import utility.file.FileInterpreter;

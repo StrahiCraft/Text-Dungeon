@@ -1,13 +1,11 @@
-package entity.inventory.item.special;
+package inventory.item.special;
 
 import dungeon.Dungeon;
-import entity.inventory.item.Item;
-import entity.inventory.item.Rarity;
-import entity.inventory.item.equipment.EquipmentSlot;
+import inventory.item.Item;
+import inventory.item.Rarity;
 import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileWriter;

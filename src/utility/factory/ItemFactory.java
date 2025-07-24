@@ -1,11 +1,11 @@
 package utility.factory;
 
-import entity.inventory.item.Rarity;
-import entity.inventory.item.equipment.EquipItem;
-import entity.inventory.item.equipment.EquipmentSlot;
-import entity.inventory.item.potions.Potion;
-import entity.inventory.item.potions.TemporaryPotion;
-import entity.inventory.item.special.BundleOfGold;
+import inventory.item.Rarity;
+import inventory.item.equipment.EquipItem;
+import inventory.item.equipment.EquipmentSlot;
+import inventory.item.potions.Potion;
+import inventory.item.potions.TemporaryPotion;
+import inventory.item.special.BundleOfGold;
 import graphics.Color;
 import utility.Stats;
 

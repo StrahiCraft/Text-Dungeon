@@ -1,7 +1,7 @@
-package entity.inventory.item.potions;
+package inventory.item.potions;
 
 import combat.CombatManager;
-import entity.inventory.item.Rarity;
+import inventory.item.Rarity;
 import graphics.Color;
 import graphics.TextRenderer;
 import utility.Stats;

@@ -1,4 +1,4 @@
-package entity.inventory.item;
+package inventory.item;
 
 public enum Rarity {
     COMMON,

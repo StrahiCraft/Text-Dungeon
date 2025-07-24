@@ -1,7 +1,7 @@
 package dungeon.rooms;
 
-import entity.inventory.item.Item;
-import entity.inventory.item.ItemGenerator;
+import inventory.item.Item;
+import inventory.item.ItemGenerator;
 import entity.player.Player;
 import entity.player.states.PlayerInLootRoom;
 import entity.player.states.PlayerState;

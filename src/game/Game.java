@@ -3,7 +3,7 @@ package game;
 import dungeon.Dungeon;
 import dungeon.DungeonGenerator;
 import entity.enemy.EnemyGenerator;
-import entity.inventory.item.ItemGenerator;
+import inventory.item.ItemGenerator;
 import entity.player.Player;
 import graphics.Color;
 import graphics.TextRenderer;

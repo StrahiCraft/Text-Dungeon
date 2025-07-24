@@ -1,4 +1,4 @@
-package entity.inventory.item.equipment;
+package inventory.item.equipment;
 
 import entity.player.Player;
 import graphics.Color;

@@ -1,6 +1,6 @@
 package graphics;
 
-import entity.inventory.item.Rarity;
+import inventory.item.Rarity;
 
 public class Color {
     public static String resetColor(){
