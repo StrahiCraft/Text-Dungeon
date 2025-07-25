@@ -14,6 +14,8 @@ public class PlayerInInventory extends PlayerState {
                 " the index of the item.");
         possibleCommands.add(Color.getColor("green") + "use" + Color.resetColor() +
                 " the index of the item.");
+        possibleCommands.add(Color.getColor("gray") + "unequip" + Color.resetColor() +
+                " the index of the item.");
         possibleCommands.add(Color.getColor("magenta") + "info" + Color.resetColor() +
                 " the index of the item.");
         possibleCommands.add(Color.getColor("red") + "close" + Color.resetColor());
