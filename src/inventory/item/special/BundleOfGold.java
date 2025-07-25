@@ -70,7 +70,7 @@ public class BundleOfGold extends Item {
     @Override
     public void writeToFile() {
         try {
-            File file = new File("assets/items/special/bundlesOfGold/" + getName() + ".txt");
+            File file = new File("assets/items/special/bundlesOfGold/" + getUnformattedName() + ".txt");
             file.createNewFile();
 
             FileWriter fileWriter = new FileWriter(file);

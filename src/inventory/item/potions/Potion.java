@@ -50,23 +50,23 @@ public class Potion extends Item {
         switch (getRarity()){
             case COMMON -> statIncreases.multiplyStats(1f);
             case UNCOMMON -> {
-                statIncreases.multiplyStats(1.1f);
+                statIncreases.multiplyStats(1.5f);
                 setPrice((int)(getPrice() * 1.5f));
             }
             case RARE -> {
-                statIncreases.multiplyStats(1.25f);
+                statIncreases.multiplyStats(2f);
                 setPrice((int)(getPrice() * 2f));
             }
             case EPIC -> {
-                statIncreases.multiplyStats(1.5f);
+                statIncreases.multiplyStats(3f);
                 setPrice((int)(getPrice() * 3f));
             }
             case LEGENDARY -> {
-                statIncreases.multiplyStats(2f);
+                statIncreases.multiplyStats(5f);
                 setPrice((int)(getPrice() * 5f));
             }
             case MITHIC -> {
-                statIncreases.multiplyStats(3f);
+                statIncreases.multiplyStats(10f);
                 setPrice((int)(getPrice() * 10f));
             }
         }
@@ -74,7 +74,7 @@ public class Potion extends Item {
 
     @Override
     public String info() {
-        return "Increases stats permanently: " + statIncreases;
+        return "Increases stats permanently by: " + statIncreases;
     }
 
     @Override
@@ -86,25 +86,28 @@ public class Potion extends Item {
     public void interpretFileData(ArrayList<String> fileData) {
         setName(fileData.get(0));
         setPrice(Integer.parseInt(fileData.get(1)));
+        statIncreases.setCurrentHealth(Float.parseFloat(fileData.get(2)));
+        statIncreases.setCurrentSpeed(Float.parseFloat(fileData.get(3)));
 
-        statIncreases.interpretFileData(new ArrayList<String>(fileData.subList(2, fileData.size())));
+        statIncreases.interpretFileData(new ArrayList<String>(fileData.subList(4, fileData.size())));
     }
 
     @Override
     public void writeToFile() {
         try {
-            File file = new File("assets/items/potions/permanent/" + getName() + ".txt");
+            File file = new File("assets/items/potions/permanent/" + getUnformattedName() + ".txt");
             file.createNewFile();
 
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write("name=" + getName() +
-                    "\nprice=" + getPrice() + "\n");
+                    "\nprice=" + getPrice() + "\ncurrentHealth=" + getStatIncreases().getCurrentHealth() +
+                    "\ncurrentSpeed=" + getStatIncreases().getCurrentSpeed() + "\n");
             statIncreases.writeToFile(fileWriter);
 
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(Color.getColor("bright red") + "Error while creating or writing to utility.file: "
-                    + Color.resetColor() + "assets/items/equipItems/" + getName() + ".txt");
+                    + Color.resetColor() + "assets/items/potions/permanent/" + getName() + ".txt");
             e.printStackTrace();
         }
     }

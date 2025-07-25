@@ -61,6 +61,10 @@ public abstract class Item implements utility.file.FileWriter, FileInterpreter {
         rerollRarity();
     }
 
+    protected String getUnformattedName() {
+        return name.replaceAll("\u001B\\[[;\\d]*[ -/]*[@-~]", "");
+    }
+
     public String getName() {
         return name;
     }

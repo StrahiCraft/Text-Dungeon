@@ -40,24 +40,25 @@ public class TemporaryPotion extends Potion {
 
     @Override
     public String info() {
-        return "Increases stats until the end of the combat turn: " + getStatIncreases();
+        return "Increases stats until the end of the combat turn by: " + getStatIncreases();
     }
 
     @Override
     public void writeToFile() {
         try {
-            File file = new File("assets/items/potions/temporary/" + getName() + ".txt");
+            File file = new File("assets/items/potions/temporary/" + getUnformattedName() + ".txt");
             file.createNewFile();
 
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write("name=" + getName() +
-                    "\nprice=" + getPrice() + "\n");
+                    "\nprice=" + getPrice() + "\ncurrentHealth=" + getStatIncreases().getCurrentHealth() +
+                    "\ncurrentSpeed=" + getStatIncreases().getCurrentSpeed() + "\n");
             getStatIncreases().writeToFile(fileWriter);
 
             fileWriter.close();
         } catch (IOException e) {
             System.out.println(Color.getColor("bright red") + "Error while creating or writing to utility.file: "
-                    + Color.resetColor() + "assets/items/equipItems/" + getName() + ".txt");
+                    + Color.resetColor() + "assets/items/potions/temporary/" + getName() + ".txt");
             e.printStackTrace();
         }
     }

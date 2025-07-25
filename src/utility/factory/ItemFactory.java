@@ -136,12 +136,12 @@ public class ItemFactory {
     private static void createPermanentPotions(){
         Potion healthPotion = new Potion(Color.getColor("red") + "Health potion" + Color.resetColor(),
                 Rarity.COMMON, 10,
-                new Stats(0, 15, 0, 0, 0, 0));
+                new Stats(0, 5, 0, 0, 0, 0));
         healthPotion.writeToFile();
 
         Potion scalePotion = new Potion(Color.getColor("yellow") + "Scale potion" + Color.resetColor(),
-                Rarity.COMMON, 25,
-                new Stats(0, 0, 2, 0, 0, 0));
+                Rarity.COMMON, 15,
+                new Stats(0, 0, 1f, 0, 0, 0));
         scalePotion.writeToFile();
 
         Potion bunnyPotion = new Potion(Color.getColor("green") + "Bunny potion" + Color.resetColor(),
@@ -151,13 +151,18 @@ public class ItemFactory {
 
         Potion gorillaPotion = new Potion(Color.getColor("gray") + "Gorilla potion" + Color.resetColor(),
                 Rarity.COMMON, 30,
-                new Stats(0, 0, 0, 3, 0, 0));
+                new Stats(0, 0, 0, 1, 0, 0));
         gorillaPotion.writeToFile();
 
         Potion heartGrowthPotion = new Potion(Color.getColor("bright red") + "Heart growth potion" + Color.resetColor(),
                 Rarity.COMMON, 20,
-                new Stats(5, 0, 0, 0, 0, 0));
+                new Stats(2, 0, 0, 0, 0, 0));
         heartGrowthPotion.writeToFile();
+
+        Potion speedPotion = new Potion("Speed potion",
+                Rarity.COMMON, 20,
+                new Stats(0, 0, 0, 0, 0, 1.5f));
+        speedPotion.writeToFile();
     }
 
     private static void createTemporaryPotions(){

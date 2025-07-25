@@ -1,5 +1,7 @@
 name=[33mTemporary [0mpotion of swiftness
 price=50
+currentHealth=0.0
+currentSpeed=10.0
 health=0.0
 armor=0.0
 damage=0.0
