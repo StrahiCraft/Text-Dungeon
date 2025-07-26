@@ -4,8 +4,8 @@ import dungeon.rooms.DungeonRoom;
 import utility.Vector2Int;
 
 public class DungeonBounds {
-    Vector2Int maxDungeonCoordinate;
-    Vector2Int minDungeonCoordinate;
+    private Vector2Int maxDungeonCoordinate;
+    private Vector2Int minDungeonCoordinate;
 
     public DungeonBounds() {
         maxDungeonCoordinate = new Vector2Int(0, 0);
