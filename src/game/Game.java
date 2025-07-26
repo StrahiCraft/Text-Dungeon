@@ -25,7 +25,7 @@ public class Game {
         input.close();
     }
 
-    public static void mainMenu(Scanner input) {
+    private static void mainMenu(Scanner input) {
         boolean enteredGame = false;
 
         while (!enteredGame) {
@@ -44,7 +44,7 @@ public class Game {
         }
     }
 
-    public static void updateChampion() {
+    private static void updateChampion() {
         champion = new Player();
         champion.interpretFileData(FileReader.readFile("assets/champion.txt"));
     }
