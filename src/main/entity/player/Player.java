@@ -4,6 +4,7 @@ import combat.CombatManager;
 import dungeon.Dungeon;
 import dungeon.rooms.DungeonRoom;
 import entity.Entity;
+import exceptions.IllegalScoreIncreaseException;
 import inventory.Inventory;
 import inventory.item.equipment.Equipment;
 import entity.player.states.PlayerState;
@@ -74,8 +75,14 @@ public class Player extends Entity implements utility.file.FileWriter, FileInter
         }
     }
 
-    public void increaseScore(int amount) {
+    public int increaseScore(int amount) throws IllegalScoreIncreaseException {
+        if(amount < 0) {
+            throw new IllegalScoreIncreaseException("Score increase cannot be negative!");
+        }
+
         currentScore += amount;
+        
+        return currentScore;
     }
 
     @Override

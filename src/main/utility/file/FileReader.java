@@ -25,15 +25,22 @@ public class FileReader {
             }
 
             fileReader.close();
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             System.out.println(Color.getColor("bright red") +  filePath + " not found!" + Color.resetColor());
+            e.printStackTrace();
+        }
+        catch (NullPointerException e) {
             e.printStackTrace();
         }
 
         return fileContents;
     }
 
-    private static String unFormatString(String formatedString){
+    public static String unFormatString(String formatedString) throws NullPointerException {
+        if(formatedString == null){
+            throw new NullPointerException("formatedString cannot be null");
+        }
         String[] unformattedStringArray = formatedString.split("=");
         return unformattedStringArray[unformattedStringArray.length - 1];
     }

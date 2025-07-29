@@ -1,8 +1,5 @@
 package entity.player.states;
 
-import dungeon.Dungeon;
-import dungeon.rooms.EmptyRoom;
-import dungeon.rooms.EnemyRoom;
 import entity.player.Player;
 
 import java.util.Scanner;

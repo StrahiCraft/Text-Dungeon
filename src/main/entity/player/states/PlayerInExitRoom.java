@@ -1,7 +1,6 @@
 package entity.player.states;
 
 import dungeon.Dungeon;
-import dungeon.DungeonGenerator;
 import entity.player.Player;
 import graphics.Color;
 

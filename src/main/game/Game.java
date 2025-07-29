@@ -26,15 +26,14 @@ public class Game {
     }
 
     private static void mainMenu(Scanner input) {
-        boolean enteredGame = false;
 
-        while (!enteredGame) {
+        while (true) {
             renderMainMenu();
             String command = input.nextLine();
 
             if(command.equalsIgnoreCase("quit")) {
                 TextRenderer.printText("Goodbye!");
-                break;
+                return;
             }
 
             if(command.equalsIgnoreCase("start")) {
