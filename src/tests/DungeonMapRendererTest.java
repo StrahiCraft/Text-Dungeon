@@ -1,5 +1,5 @@
-import dungeon.DungeonMapRenderer;
-import graphics.Color;
+import client.dungeon.DungeonMapRenderer;
+import client.graphics.Color;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

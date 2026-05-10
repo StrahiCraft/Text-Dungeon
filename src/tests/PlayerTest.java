@@ -1,5 +1,5 @@
-import entity.player.Player;
-import exceptions.IllegalScoreIncreaseException;
+import client.entity.player.Player;
+import client.exceptions.IllegalScoreIncreaseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

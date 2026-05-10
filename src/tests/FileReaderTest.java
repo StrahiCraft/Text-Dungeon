@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import utility.file.FileReader;
+import client.utility.file.FileReader;
 
 import static org.junit.jupiter.api.Assertions.*;
 class FileReaderTest {
