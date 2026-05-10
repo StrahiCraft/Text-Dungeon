@@ -29,7 +29,10 @@ public class ServerApplication {
      * @param args
      */
     public static void main(String[] args) {
-        DatabaseManager.connect();
+        if(!DatabaseManager.connect()){
+            System.out.println("Connection to database failed!");
+            return;
+        }
         ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(PORT);

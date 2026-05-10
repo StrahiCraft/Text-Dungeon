@@ -1,15 +1,11 @@
 package server;
 
 import client_server_communication.ServerMessage;
-import server.database.DatabaseManager;
 import client_server_communication.ServerMessageType;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
 
 /**

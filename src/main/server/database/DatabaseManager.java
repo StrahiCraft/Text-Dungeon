@@ -28,13 +28,15 @@ public class DatabaseManager {
      * Tries to connect to the database using the given username, password and url.
      * Should be called from the server on startup.
      */
-    public static void connect(){
+    public static boolean connect(){
         try {
             connection = DriverManager.getConnection(url, username, password);
         }
         catch (Exception e){
             e.printStackTrace();
+            return false;
         }
+        return true;
     }
 
     /**
